@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#111315" />
+<title>MOTION DESIGN LAB / 02 — Motion Grammar</title>
+<style>
+:root{--bg:#111315;--surface:#191b1e;--surface2:#222529;--line:#34383e;--softline:#292d31;--ink:#f1f4ee;--muted:#999fa7;--acid:#d9fa39;--orange:#ff6600;--stage:#242424}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Arial","PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--acid);outline-offset:2px}::selection{background:var(--acid);color:#101210}.app-shell{max-width:1800px;margin:0 auto;padding:0 30px}.global-header{height:79px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #3b3e42;gap:22px}.brand-lockup{display:flex;align-items:center;gap:12px;font-weight:950;letter-spacing:-.9px;font-size:19px;white-space:nowrap}.brand-lockup b{font-weight:950}.brand-stop{color:var(--acid)}.brand-icon{width:25px;height:25px;display:grid;grid-template-columns:repeat(2,9px);grid-template-rows:repeat(2,9px);gap:4px;transform:rotate(-8deg)}.brand-icon span{background:var(--acid)}.brand-icon span:nth-child(2){clip-path:polygon(100% 0,100% 100%,0 100%)}.brand-icon span:nth-child(3){clip-path:polygon(0 0,100% 100%,0 100%)}.global-meta,.header-right{font-family:Arial,sans-serif;font-size:10px;font-weight:800;letter-spacing:1.1px;color:#949ba1;display:flex;gap:12px;align-items:center;white-space:nowrap}.status-dot{width:7px;height:7px;background:var(--acid);border-radius:50%;box-shadow:0 0 0 3px #303b19}.header-sep{width:1px;height:12px;background:#454951}.tiny-plus{font-size:19px;color:var(--acid);margin-left:10px}.intro{display:flex;gap:48px;align-items:stretch;justify-content:space-between;padding:41px 0 36px}.intro-left{max-width:920px}.eyebrow{font-size:10px;letter-spacing:1.75px;font-weight:850;color:var(--acid);margin:0 0 17px}.kicker-square{display:inline-block;width:7px;height:7px;background:var(--acid);margin-right:9px}.intro h1{font-size:clamp(46px,5.8vw,100px);font-weight:950;line-height:.88;letter-spacing:-.065em;margin:0;white-space:nowrap}.intro h1 span{color:var(--acid)}.intro-desc{max-width:715px;color:#c4c8cd;font-size:13px;line-height:1.9;margin:21px 0 0}.intro-desc strong{color:#fff}.edition{align-self:stretch;width:160px;min-width:160px;background:var(--acid);color:#141615;padding:16px 15px;display:flex;flex-direction:column;justify-content:space-between}.edition-top,.edition-bot{font-size:9px;line-height:1.5;font-weight:850;letter-spacing:.04em}.edition-num{font-size:58px;letter-spacing:-.11em;font-weight:1000;line-height:1}.edition-num span{font-size:19px;letter-spacing:-.08em}
+.domain-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);margin-bottom:22px}.domain-tab{background:#181a1c;border:0;border-right:1px solid var(--line);color:#d5d9df;min-height:100px;text-align:left;padding:19px;display:flex;flex-direction:column;gap:9px;transition:background .2s,color .2s}.domain-tab:last-child{border-right:0}.domain-tab:hover{background:#282b2c}.domain-tab.active{background:var(--acid);color:#191c1b}.tab-index{display:flex;justify-content:space-between;font-weight:850;font-size:9px;letter-spacing:1.5px;opacity:.76}.tab-title{font-size:clamp(12px,1.25vw,17px);font-weight:950;letter-spacing:-.02em}.tab-cn{font-size:11px;font-weight:800;opacity:.7}.workspace{display:grid;grid-template-columns:245px minmax(0,1fr) 280px;gap:20px;align-items:start}.library-panel,.inspector-panel{background:#1b1d1f;border:1px solid var(--line);min-width:0}.panel-head{min-height:51px;padding:0 16px;display:flex;justify-content:space-between;align-items:center;gap:9px;font-size:10px;letter-spacing:1px;font-weight:900;border-bottom:1px solid var(--line)}.panel-head>span:last-child{font-size:9px;color:var(--muted)}.panel-head i{font-style:normal;color:var(--acid);margin-left:9px}.library-list{padding:7px}.library-item{display:grid;grid-template-columns:28px minmax(0,1fr) 11px;gap:7px;width:100%;align-items:center;text-align:left;padding:14px 9px;color:#cdd1d5;background:none;border:1px solid transparent;border-bottom-color:#303337}.library-item:last-child{border-bottom-color:transparent}.library-item:hover{background:#292d2e}.library-item.selected{color:#d9fa39;background:#29301f;border-color:#596c24}.library-num{font-size:9px;font-weight:900;color:#7a7f86}.library-item.selected .library-num{color:#d9fa39}.library-title{font-weight:900;font-size:11px;letter-spacing:-.1px;line-height:1.4;display:block}.library-sub{font-size:10px;color:#999da5;display:block;margin-top:4px}.library-item.selected .library-sub{color:#b9c99a}.library-arrow{font-size:13px}.library-note{margin:18px 14px;padding:13px 10px 9px;border-top:2px solid #535a38;font-size:10px;line-height:1.8;color:#92989f}.library-note strong{color:#d4dadc}.code-square{color:var(--acid);font-size:18px}.theater{min-width:0}.theater-label{height:34px;display:flex;justify-content:space-between;color:#a7abb0;align-items:flex-start;font-size:10px;letter-spacing:1.1px;font-weight:900}.signal-circle{display:inline-block;width:6px;height:6px;background:var(--acid);border-radius:50%;margin-right:7px}.stage-shell{border:1px solid #4b4d4d;background:#181a1c}.stage{width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;isolation:isolate;container-type:inline-size;background:var(--sc-bg);color:var(--sc-ink);--sc-bg:#242424;--sc-ink:#d9fa39;--sc-accent:#d9fa39;--sc-hot:#ff6500;--sc-card:#d9fa39;--sc-quiet:#5b6240;--sc-line:rgba(217,250,57,.28);--sc-inverse:#202222}.stage[data-palette="pra"]{--sc-bg:#003cf5;--sc-ink:#fbff05;--sc-accent:#fbff05;--sc-hot:#fff;--sc-card:#fbff05;--sc-quiet:#1444d7;--sc-line:rgba(255,255,40,.33);--sc-inverse:#071846}.stage[data-palette="editorial"]{--sc-bg:#f3f2eb;--sc-ink:#1d1e1e;--sc-accent:#ff5b35;--sc-hot:#ff5b35;--sc-card:#ff5b35;--sc-quiet:#e2e0d7;--sc-line:rgba(10,10,10,.24);--sc-inverse:#f7f6f0}.stage[data-palette="mono"]{--sc-bg:#f0f1ed;--sc-ink:#161819;--sc-accent:#191919;--sc-hot:#d0fd2b;--sc-card:#e1e3dc;--sc-quiet:#c4c6bf;--sc-line:rgba(10,10,10,.20);--sc-inverse:#fff}.stage[data-palette="sport"]{--sc-bg:#12151c;--sc-ink:#f2f3ed;--sc-accent:#ff5e1c;--sc-hot:#ff5e1c;--sc-card:#20252a;--sc-quiet:#3a414a;--sc-line:rgba(250,250,250,.16);--sc-inverse:#111}.stage[data-palette="mint"]{--sc-bg:#d4dbd3;--sc-ink:#212823;--sc-accent:#387e60;--sc-hot:#ff691e;--sc-card:#f0f0e4;--sc-quiet:#9aa89d;--sc-line:rgba(25,36,25,.2);--sc-inverse:#f1f2e7}.stage[data-palette="yellow"]{--sc-bg:#f6ff00;--sc-ink:#141414;--sc-accent:#003cf5;--sc-hot:#003cf5;--sc-card:#f2f2e9;--sc-quiet:#c2c900;--sc-line:rgba(10,10,10,.15);--sc-inverse:#fff}.stage-grid{inset:0;position:absolute;z-index:1;background-image:repeating-linear-gradient(to right,transparent 0,transparent calc(8.33333% - 1px),var(--sc-line) calc(8.33333% - 1px),var(--sc-line) 8.33333%),repeating-linear-gradient(to bottom,transparent 0,transparent calc(12.5% - 1px),var(--sc-line) calc(12.5% - 1px),var(--sc-line) 12.5%);opacity:.0;pointer-events:none}.stage.grid-on .stage-grid{opacity:.65}.stage-top,.stage-bottom{position:absolute;left:5.4%;right:5.4%;z-index:20;display:flex;justify-content:space-between;align-items:center;white-space:nowrap;font-size:clamp(5px,1.05cqw,12px);font-weight:900;letter-spacing:.03em}.stage-top{top:6%;}.stage-bottom{bottom:5%;padding-top:1.2%;border-top:1px solid var(--sc-line)}.stage-monogram{font-weight:1000;font-size:clamp(9px,2.5cqw,29px);letter-spacing:-.06em}.stage-line{display:inline-block;width:3.5cqw;height:1px;background:var(--sc-ink);vertical-align:middle;margin:0 .8cqw}.stage-bottom-progress{display:flex;gap:10px}.stage-boundary{position:absolute;inset:4.2%;border:1px solid transparent;pointer-events:none;z-index:19}.stage.grid-on .stage-boundary{border-color:var(--sc-line)}.stage-scene{position:absolute;inset:0;overflow:hidden}.stage-scene *{box-sizing:border-box}.stage-scene .m{will-change:transform,clip-path,opacity}.stage-scene .stage-small{font-size:clamp(7px,1.2cqw,14px);font-weight:900;letter-spacing:.04em}.stage-scene .label-mini{font-size:clamp(6px,.95cqw,11px);font-weight:900;letter-spacing:.1em}.stage-scene .micro{font-size:clamp(6px,.8cqw,10px);font-weight:800;letter-spacing:.03em}.stage-scene .giant{font-weight:1000;font-size:clamp(30px,12.7cqw,210px);letter-spacing:-.082em;line-height:.86}.stage-scene .headline{font-weight:1000;font-size:clamp(25px,9cqw,137px);letter-spacing:-.075em;line-height:.90}.stage-scene .medium-title{font-weight:1000;font-size:clamp(20px,6cqw,95px);letter-spacing:-.06em;line-height:.92}.stage-scene .corner-index{font-weight:950;letter-spacing:-.07em;font-size:clamp(15px,2.6cqw,37px)}.stage-scene .sline{background:var(--sc-ink);height:2px;transform-origin:left center}.stage-scene .sline-thin{background:var(--sc-ink);height:1px;opacity:.75;transform-origin:left center}.stage-scene .c-accent{color:var(--sc-accent)}.stage-scene .bg-accent{background:var(--sc-accent)}.stage-scene .bg-ink{background:var(--sc-ink)}.stage-scene .bg-hot{background:var(--sc-hot)}.stage-scene .dark-text{color:var(--sc-bg)}.stage-scene .display-mask{overflow:hidden}.stage-scene .line-frame{position:absolute;left:5.5%;right:5.5%;bottom:21%}.stage-scene .hero-center{position:absolute;top:36%;left:6%;right:6%}.stage-scene .hero-left{position:absolute;left:6%;top:31%;right:8%}.stage-scene .hero-bottom{position:absolute;left:6%;bottom:20%;right:8%}.stage-scene .upper-caption{position:absolute;left:6%;top:24%}.stage-scene .lower-caption{position:absolute;left:6%;bottom:17%}.stage-scene .scene-side{position:absolute;right:6%;top:34%;text-align:right;width:22%}.stage-scene .badge-number{background:var(--sc-accent);color:var(--sc-bg);font-weight:950;padding:.7cqw 1cqw;display:inline-block}.stage-scene .cross-grid{background-image:linear-gradient(45deg,transparent 49.5%,var(--sc-line) 50%,transparent 50.5%),linear-gradient(-45deg,transparent 49.5%,var(--sc-line) 50%,transparent 50.5%);background-size:12.5cqw 12.5cqw}.stage-scene .dot-bg{background-image:radial-gradient(var(--sc-ink) 1px,transparent 1.5px);background-size:2.2cqw 2.2cqw;opacity:.45}.stage-scene .frame-fig{border:1px solid var(--sc-ink)}.stage-scene .scene-columns{position:absolute;left:6%;right:6%;top:33%;bottom:19%;display:grid;grid-template-columns:repeat(3,1fr);gap:1.25cqw}.stage-scene .subcaption{font-size:clamp(6px,1.1cqw,14px);font-weight:850;line-height:1.2}.stage-scene .ruler{display:flex;gap:.4cqw}.stage-scene .ruler i{width:1cqw;height:1cqw;border:1px solid var(--sc-ink)}.stage-scene .numeric{font-size:clamp(26px,8.7cqw,140px);letter-spacing:-.075em;line-height:.85;font-weight:1000;white-space:nowrap}.stage-scene svg{overflow:visible}.stage-scene .chart-line{stroke:var(--sc-accent);stroke-width:3;fill:none;vector-effect:non-scaling-stroke}.stage-scene .chart-grid{stroke:var(--sc-line);stroke-width:1;fill:none;vector-effect:non-scaling-stroke}.stage-scene .chart-dot{fill:var(--sc-hot)}
+.player-bar{background:#1e2022;display:flex;align-items:center;gap:13px;padding:9px 13px;height:56px}.player-primary{border:0;background:var(--acid);color:#151716;height:34px;min-width:93px;font-weight:950;font-size:10px;letter-spacing:.04em}.player-primary span{padding-left:4px}.player-icon{background:none;border:1px solid #52575b;height:34px;min-width:35px;color:#d9dddb;font-size:14px}.player-icon:hover{color:var(--acid);border-color:var(--acid)}.timeline-wrap{flex:1;min-width:0;display:flex;align-items:center}.timeline-wrap input{width:100%;accent-color:var(--acid);cursor:pointer}.player-time{font-family:Consolas,monospace;color:#a7adb3;font-size:10px;white-space:nowrap}.scene-summary{display:flex;justify-content:space-between;gap:18px;padding:24px 0 23px;align-items:flex-start;border-bottom:1px solid var(--line)}.small-label{color:var(--acid);font-size:9px;font-weight:900;letter-spacing:1.2px}.scene-summary h2{font-size:clamp(21px,2vw,30px);letter-spacing:-.05em;line-height:1.1;margin:7px 0 10px}.scene-summary p{color:#b3b9c0;font-size:12px;line-height:1.7;max-width:720px;margin:0}.scene-classification{display:flex;flex-direction:column;align-items:flex-end;gap:7px;font-size:9px;letter-spacing:.9px;font-weight:950;color:#aaa}.scene-classification span:first-child{color:var(--acid)}.lesson-section{margin-top:23px}.lesson-head{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px;font-size:10px;letter-spacing:1px;font-weight:900;color:#e6e9e9}.lesson-head span:last-child{font-size:9px;color:#899099}.recipe-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#33373a;border:1px solid #33373a;margin-top:12px}.recipe-item{padding:16px 15px;background:#1b1d20;min-height:132px}.recipe-kicker{font-size:9px;font-weight:900;color:var(--acid);letter-spacing:1px}.recipe-item h3{font-size:13px;margin:13px 0 8px;font-weight:950}.recipe-item p{font-size:11px;line-height:1.65;color:#aeb4bc;margin:0}.qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.qa-card{background:#1b1d20;padding:16px;border:1px solid #303338;min-height:118px}.qa-title{font-size:10px;letter-spacing:.3px;font-weight:900}.qa-check{color:var(--acid);font-size:16px;margin-right:6px}.qa-cross{color:var(--orange);font-size:18px;margin-right:6px}.qa-card p{color:#afb5bc;font-size:11px;line-height:1.75;margin:11px 0 0}.prompt-section{margin-bottom:20px}.prompt-tools{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:12px}.prompt-note{font-size:11px;line-height:1.6;color:#9299a2}.action-copy{border:1px solid var(--acid);background:var(--acid);color:#131713;padding:13px 16px;white-space:nowrap;font-size:10px;font-weight:950}.prompt-output{font-family:Consolas,"SFMono-Regular",monospace;white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;line-height:1.8;color:#dee3df;background:#181a1c;border:1px solid #33383c;padding:18px;max-height:360px;overflow:auto;margin:12px 0 0}
+.inspector-panel{padding-bottom:18px}.inspector-panel .panel-head{margin-bottom:10px}.indicator-online{color:var(--acid)!important}.control-group{padding:15px 17px 17px;border-bottom:1px solid #34373a}.field-label{display:flex;justify-content:space-between;gap:10px;font-size:10px;letter-spacing:.35px;font-weight:950;align-items:center;margin-bottom:13px}.field-label>span:last-child{color:var(--acid);font-family:Consolas,monospace;font-size:10px;white-space:nowrap}.control-group input[type=text]{border:1px solid #4a4f51;color:#fff;background:#272a2b;width:100%;height:41px;padding:0 10px;font-size:13px;font-weight:800}.control-tip{color:#8f949c;font-size:10px;line-height:1.6;margin:10px 0 0}.palette-options{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.palette-btn{position:relative;height:36px;border:2px solid #44484c;background:var(--p-bg);overflow:hidden;display:flex;align-items:end;justify-content:end;padding:0}.palette-btn::before{content:"";background:var(--p-fg);width:72%;height:15px;position:absolute;top:0;left:0;clip-path:polygon(0 0,100% 0,100% 30%,70% 30%,70% 100%,0 100%)}.palette-btn::after{content:"";position:absolute;right:4px;bottom:4px;width:9px;height:9px;background:var(--p-hot)}.palette-btn.selected{outline:2px solid var(--acid);outline-offset:2px}.palette-btn:disabled{opacity:.4;cursor:not-allowed}.three-options{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.three-options button{border:1px solid #4a4f52;background:#292c2d;color:#c3c6c8;padding:9px 2px;font-weight:900;font-size:11px}.three-options button small{display:block;font-size:9px;margin-top:5px;color:#8e969b}.three-options button.selected{border-color:var(--acid);color:var(--acid);background:#2a3023}.three-options button.selected small{color:#b9c8a5}.control-group input[type=range]{width:100%;accent-color:var(--acid)}.scale-labels{display:flex;justify-content:space-between;color:#7b8187;font-family:Consolas,monospace;font-size:9px;margin-top:6px}.control-group select{height:41px;width:100%;background:#282b2e;color:#dee1e2;border:1px solid #4d5155;padding:0 9px;font-size:11px;cursor:pointer}.inspector-bottom{padding:18px 17px 0}.preset-download{width:100%;height:46px;background:transparent;color:var(--acid);border:1px solid var(--acid);font-size:10px;letter-spacing:.6px;font-weight:950}.preset-download:hover{background:#2b3521}.inspector-small{font-size:10px;color:#7d848b;line-height:1.8;margin-top:13px}
+.course-map{margin:50px 0 0;padding-top:36px;border-top:1px solid #3e4347}.course-header{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px}.course-header h2{font-size:clamp(22px,2.9vw,38px);letter-spacing:-.05em;line-height:1.2;margin:0;font-weight:950}.course-header>span{font-size:10px;letter-spacing:1px;color:#a0a6ac;font-weight:900}.course-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.course-card{background:#1e2122;border:1px solid #373b3e;padding:18px;min-height:175px;display:flex;flex-direction:column;justify-content:space-between;gap:16px}.course-card-num{display:flex;justify-content:space-between;font-weight:950;font-size:10px;color:var(--acid)}.course-card h3{font-size:16px;letter-spacing:-.03em;margin:0 0 8px}.course-card p{color:#aab0b5;font-size:11px;line-height:1.6;margin:0}.course-card button{border:0;background:none;color:var(--acid);text-align:left;font-weight:950;font-size:10px;padding:0}.workflow-strip{display:flex;justify-content:space-between;gap:15px;align-items:center;background:var(--acid);color:#151916;padding:19px 24px;margin:22px 0 24px;font-weight:950;font-size:10px;letter-spacing:.8px}.workflow-strip i{font-size:18px;font-style:normal}footer{border-top:1px solid #34383a;display:flex;justify-content:space-between;gap:10px;padding:26px 0 48px;font-size:9px;color:#8d949b;font-weight:900;letter-spacing:.7px}
+@media(max-width:1500px){.workspace{grid-template-columns:210px minmax(0,1fr) 260px;gap:15px}.app-shell{padding:0 20px}.library-item{padding:11px 7px}.library-title{font-size:10px}.control-group{padding:13px 13px}.lesson-section{margin-top:18px}.edition{min-width:138px;width:138px}.intro h1{font-size:clamp(46px,5.5vw,90px)}}
+@media(max-width:1170px){.workspace{grid-template-columns:220px minmax(0,1fr)}.inspector-panel{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding-bottom:0}.inspector-panel .panel-head{grid-column:1/-1;margin-bottom:0}.control-group{border-right:1px solid #34373a}.inspector-bottom{padding:20px}.global-meta{display:none}.stage-scene .giant{font-size:13cqw}.course-cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.app-shell{padding:0 12px}.global-header{height:64px}.header-right{display:none}.intro{padding:28px 0 25px}.intro h1{font-size:clamp(38px,8vw,67px)}.intro-desc{font-size:12px}.edition{display:none}.domain-tabs{grid-template-columns:repeat(2,1fr)}.domain-tab{min-height:87px;padding:13px}.domain-tab:nth-child(2){border-right:0}.domain-tab:nth-child(-n+2){border-bottom:1px solid var(--line)}.tab-title{font-size:14px}.workspace{display:flex;flex-direction:column;gap:14px}.library-panel,.inspector-panel,.theater{width:100%}.library-list{display:grid;grid-template-columns:repeat(2,1fr)}.library-item{border-bottom:1px solid #34373a}.library-note{display:none}.stage{aspect-ratio:16/9}.scene-summary{padding:20px 0}.recipe-grid{grid-template-columns:1fr}.recipe-item{min-height:unset}.inspector-panel{display:grid;grid-template-columns:repeat(2,1fr)}.inspector-panel .panel-head{grid-column:1/-1}.inspector-bottom{padding:14px}.course-header{display:block}.course-header>span{display:block;margin-top:15px}.course-cards{grid-template-columns:repeat(2,1fr)}.course-card{min-height:175px}.workflow-strip{flex-wrap:wrap;justify-content:center}.workflow-strip i{font-size:13px}footer{display:block;line-height:2}}
+@media(max-width:480px){.intro h1{font-size:11vw}.stage-scene .stage-small{font-size:1.6cqw}.library-list{grid-template-columns:1fr}.library-item{grid-template-columns:25px 1fr 12px;padding:10px 7px}.library-note{display:none}.inspector-panel{grid-template-columns:1fr}.control-group{border-right:0}.qa-grid{grid-template-columns:1fr}.scene-classification{display:none}.player-bar{gap:7px;padding:8px}.player-primary{min-width:42px}.player-primary span{display:none}.player-time{font-size:8px}.player-icon{height:30px;min-width:29px}.prompt-tools{display:block}.action-copy{width:100%;margin-top:11px}.course-cards{grid-template-columns:1fr}.workflow-strip{font-size:9px;gap:9px}.intro-desc{line-height:1.75}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+/* Ensure motion wrapper boxes preserve the dimensions of their layout slots. */
+.stage-scene [data-motion="morph"],.stage-scene [data-motion="parallax"],.stage-scene [data-motion="wipe"],.stage-scene [data-motion="grow-right"]{width:100%;height:100%}
+.stage-scene [style*="display:grid"] > .m{height:100%;min-height:0;min-width:0}
+.stage-scene [style*="display:grid"] > .m > div{height:100%}
+.stage-scene .bar-track > [data-motion="draw-width"]{height:100%}
+.stage-scene .split-wrap > .m{flex:1;min-width:0;height:100%}
+.stage-scene [style*="top:32%;bottom:20%;display:flex"] > [data-motion]{flex:1;min-width:0;height:100%}
+
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <header class="global-header">
+    <div class="brand-lockup"><div class="brand-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></div><span>MOTION <b>DESIGN</b> LAB<span class="brand-stop">.</span></span></div>
+    <div class="global-meta"><span class="status-dot"></span><span>MOTION GRAMMAR LIBRARY</span><span class="header-sep"></span><span>VOL. 02 / 2026</span></div>
+    <span class="header-right">BUILT FOR CODEX / REMOTION / GSAP <span class="tiny-plus">✳</span></span>
+  </header>
+
+  <section class="intro">
+    <div class="intro-left"><p class="eyebrow"><span class="kicker-square"></span>INTERACTIVE MOTION STUDIES — 4 DOMAINS / 32 TECHNIQUES</p>
+      <h1>DESIGN IN <span>MOTION.</span></h1>
+      <p class="intro-desc">把<strong>视觉风格、文字层级、图形结构、数据叙事</strong>变成可控制、可复用的动画语言。选择技法，播放设计实验，实时调整节奏，复制 Codex 执行指令。</p>
+    </div>
+    <div class="edition"><div class="edition-top">EXPERIMENT NO.</div><div class="edition-num">02<span>/04</span></div><div class="edition-bot">FROM STYLE FRAME<br>TO MOTION SYSTEM</div></div>
+  </section>
+
+  <nav class="domain-tabs" id="domainTabs" aria-label="四大动效课程模块"></nav>
+
+  <main class="workspace">
+    <aside class="library-panel" aria-label="动效技法列表">
+      <div class="panel-head"><span>STUDY INDEX <i id="studyCount">08</i></span><span>SELECT / 01—08</span></div>
+      <div class="library-list" id="techList"></div>
+      <div class="library-note"><div class="code-square">✳</div><p>每项实验保持可编辑结构。这里的数字、条形图和示意场景属于<strong>教学占位数据</strong>，不能直接当作真实报道内容。</p></div>
+    </aside>
+
+    <section class="theater">
+      <div class="theater-label"><span><b class="signal-circle"></b> LIVE MOTION STUDY</span><span id="sceneCounter">TY / 01</span></div>
+      <div class="stage-shell">
+        <div class="stage" id="stage" data-palette="tra" aria-label="可交互动画预览，使用播放按钮观看">
+          <div class="stage-grid" id="stageGrid" aria-hidden="true"></div>
+          <div class="stage-top"><span class="stage-monogram" id="stageMonogram">MD / LAB</span><span id="stageTopRight">MOTION STUDY / 01 <i class="stage-line"></i> 2026</span></div>
+          <div class="stage-scene" id="stageScene"></div>
+          <div class="stage-bottom"><span id="stageBottomLeft">KINETIC TYPOGRAPHY</span><span class="stage-bottom-progress"><span id="stageProgress">00.0 / 05.2</span> <span class="stage-progress-segments" aria-hidden="true">▰▰▱▱▱▱▱▱</span></span></div>
+          <div class="stage-boundary" aria-hidden="true"></div>
+        </div>
+        <div class="player-bar">
+          <button id="replay" class="player-primary" aria-label="重新播放">↻ <span>REPLAY</span></button>
+          <button id="togglePlay" class="player-icon" aria-label="播放或暂停">Ⅱ</button>
+          <label class="timeline-wrap" aria-label="动效时间轴"><input id="timeline" type="range" min="0" max="5200" value="0" step="1" aria-label="播放时间位置"/></label>
+          <span class="player-time" id="playerTime">00:00 / 00:05</span>
+          <button class="player-icon grid-toggle" id="gridToggle" aria-pressed="false" title="显示或隐藏栅格">▦</button>
+        </div>
+      </div>
+      <div class="scene-summary">
+        <div><div class="small-label">CURRENT TECHNIQUE</div><h2 id="studyTitle">Masked Baseline Reveal</h2><p id="studySummary"></p></div>
+        <div class="scene-classification"><span id="studyTag">TYPOGRAPHY</span><span id="studyDifficulty">LEVEL / 01</span></div>
+      </div>
+      <section class="lesson-section">
+        <div class="lesson-head"><span>01 / MOTION RECIPE</span><span>STRUCTURE → BEHAVIOR → TIME</span></div>
+        <div class="recipe-grid" id="recipeGrid"></div>
+      </section>
+      <section class="lesson-section">
+        <div class="lesson-head"><span>02 / ART DIRECTION & QC</span><span>WHAT TO DO / WHAT TO AVOID</span></div>
+        <div class="qa-grid"><article class="qa-card"><span class="qa-title"><span class="qa-check">+</span> 设计意图 / DESIGN INTENT</span><p id="intentText"></p></article><article class="qa-card"><span class="qa-title"><span class="qa-cross">−</span> 常见错误 / QUALITY CONTROL</span><p id="avoidText"></p></article></div>
+      </section>
+      <section class="lesson-section prompt-section">
+        <div class="lesson-head"><span>03 / CODEX PROMPT</span><span>PARAMETERIZED SPECIFICATION</span></div>
+        <div class="prompt-tools"><div class="prompt-note">提示词根据右侧控制面板同步更新，适合复制进 Codex / Cursor，让模型先做单镜头 Motion Study。</div><button id="copyPrompt" class="action-copy">COPY PROMPT ↗</button></div>
+        <pre id="promptText" class="prompt-output"></pre>
+      </section>
+    </section>
+
+    <aside class="inspector-panel">
+      <div class="panel-head"><span>MOTION CONTROL</span><span class="indicator-online">● ACTIVE</span></div>
+      <div class="control-group"><label class="field-label" for="headlineInput"><span>HEADLINE / 主标题测试文案</span><span>EDIT</span></label><input id="headlineInput" type="text" value="GO GLOBAL" maxlength="18" spellcheck="false" placeholder="GO GLOBAL"/><p class="control-tip">将替换部分实验的主标题，检查中文/英文排版承载能力。</p></div>
+      <div class="control-group"><div class="field-label"><span>COLOR SYSTEM / 色彩语言</span><span id="paletteLabel">TRA</span></div><div class="palette-options" id="paletteOptions"></div><p class="control-tip" id="paletteTip">Art Direction 章节会锁定每个案例自己的配色。</p></div>
+      <div class="control-group"><div class="field-label"><span>MOTION ENERGY / 动态力度</span><span id="energyValue">02 / BALANCED</span></div><div class="three-options" id="energyOptions"><button data-energy="1">01 <small>克制</small></button><button class="selected" data-energy="2">02 <small>标准</small></button><button data-energy="3">03 <small>激进</small></button></div></div>
+      <div class="control-group"><label class="field-label" for="duration"><span>ENTRY DURATION / 入场时长</span><span id="durationValue">540 MS</span></label><input type="range" id="duration" min="280" max="1100" step="20" value="540"/><div class="scale-labels"><span>280 ms</span><span>1100 ms</span></div></div>
+      <div class="control-group"><label class="field-label" for="stagger"><span>STAGGER / 错位延迟</span><span id="staggerValue">100 MS</span></label><input type="range" id="stagger" min="0" max="260" step="10" value="100"/><div class="scale-labels"><span>0 ms</span><span>260 ms</span></div></div>
+      <div class="control-group"><label class="field-label" for="ease"><span>EASING / 缓动曲线</span><span>CURVE</span></label><select id="ease"><option value="precision">Precision Out / 精密减速</option><option value="smooth">Smooth / 平滑</option><option value="linear">Linear / 匀速</option><option value="snap">Snap / 强收束</option></select></div>
+      <div class="control-group"><label class="field-label" for="direction"><span>DIRECTION / 主要方向</span><span>AXIS</span></label><select id="direction"><option value="up">↑ UP / 向上</option><option value="left">← LEFT / 向左</option><option value="right">→ RIGHT / 向右</option><option value="down">↓ DOWN / 向下</option></select></div>
+      <div class="inspector-bottom"><button id="downloadPreset" class="preset-download">↓ EXPORT MOTION TOKENS</button><div class="inspector-small">可导出 JSON 参数，用于 Codex/Remotion 项目配置。当前浏览器演示属于设计参考，并非视频渲染引擎。</div></div>
+    </aside>
+  </main>
+
+  <section class="course-map">
+    <div class="course-header"><div><div class="eyebrow">COURSE STRUCTURE / 04 TRACKS</div><h2>从美术指导，到可执行的运动规则。</h2></div><span>32 TECHNIQUES / ONE DESIGN LANGUAGE</span></div>
+    <div class="course-cards" id="courseCards"></div>
+    <div class="workflow-strip"><span>STYLE FRAME</span><i>→</i><span>LAYOUT SYSTEM</span><i>→</i><span>MOTION SPEC</span><i>→</i><span>5s PROOF</span><i>→</i><span>QC & EXPORT</span></div>
+  </section>
+  <footer><span>MDL · MOTION DESIGN LAB / 02</span><span>ORIGINAL INTERACTIVE STUDY — FOR LEARNING & PROTOTYPING</span><span>2026 / VISUAL SYSTEM</span></footer>
+</div>
+<script>
+/* MOTION DESIGN LAB / 02. 32 original instructional studies, deterministic offline player.
+   The values in the data visualization scenes are illustrative and not factual. */
+'use strict';
+const DOM = id => document.getElementById(id);
+const esc = x => String(x).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const domains = [
+ {id:'TY',title:'Typography Motion',cn:'文字动效',sub:'排版如何成为主角',focus:'文字是运动主体。学习基线、行遮罩、字距、数字、字号裁切与共享排版。',className:'TYPOGRAPHY'},
+ {id:'GR',title:'Graphic Motion',cn:'图形与转场',sub:'图形如何组织空间',focus:'转场不应是装饰，而应延续坐标、方向、色块和视觉锚点。',className:'GRAPHIC SYSTEMS'},
+ {id:'IN',title:'Information Design',cn:'数据与信息动效',sub:'让数据构成故事',focus:'从数据源到可视化，先建立比较逻辑与准确的编码，再设计节奏。',className:'DATA NARRATIVE'},
+ {id:'AD',title:'Motion Art Direction',cn:'风格与美术指导',sub:'一种内容，多种视觉语言',focus:'在同一信息目标下实验工业、编辑、新闻、影像与空间语言的差别。',className:'ART DIRECTION'}
+];
+const make=(id,en,cn,sub,summary,layout,behavior,timing,intent,avoid,level=1)=>({id,en,cn,sub,summary,layout,behavior,timing,intent,avoid,level,domain:id.slice(0,2)});
+const studies=[
+ make('TY01','Masked Baseline Reveal','行遮罩·基线升入','KINETIC TYPE / BASICS','文字沿基线进入固定裁切框，真正移动的是字形，不是容器。','固定主标题位置；用独立 overflow-hidden 文字行建立精确对齐。','从行框底部沿 Y 轴上移；两行或多个短语按阅读顺序依次入场。','单行 480–620ms；行间错位 80–120ms；完成后保持至少 1.3s。','高密度信息中只让主标题动；利用静止的网格和注释形成速度对比。','不要让背景、容器与文字一起漂移；避免逐字弹跳和整体淡入。'),
+ make('TY02','Staggered Word Cascade','单词阶梯错位','KINETIC TYPE / RHYTHM','三个短词逐级出现；运动顺序就是阅读顺序。','三行文字左对齐，重心沿纵向推进；细标尺只辅助定位。','按组序列 stagger；后一组应在前一组快完成时进入。','默认每行 540ms，错位 100–160ms；最终集体保持。','特别适合一个问题的三段论、三个策略或品牌主张。','不要把每个字母单独弹出；不要让错位过大导致失去词组关系。'),
+ make('TY03','Tracking Compression','字距收束','TYPE / PRECISION','用字体间距收紧表达“聚焦”，是无需大位移的微观动效。','中心大词、精密线框与极小辅助标签构成压缩式版面。','tracking 从松散向紧凑变化；可叠加轻微透明度，但不依赖缩放。','约 700–1000ms；缓动需稳定；结束字距按字体实际视觉微调。','适合技术性、理性、专业的章节标题与终幕字标。','不要大幅度压扁字宽来冒充字距；避免中文字体被拉伸。',2),
+ make('TY04','Editorial Crop Type','超大字裁切','TYPE / SCALE','大字号越过画布边界，利用裁切制造杂志感与尺度对比。','巨型主词占据主要视觉面积，辅助文字只在一角保留。','文字从窗口边缘滑入；版面自身对溢出负责；出场可由同向色块擦过。','入场 450–700ms，信息保持 1300ms 以上。','适合章节间强节奏切换、品牌宣言及封面式开场。','切勿让核心字词失去可辨认性；裁切要有明确对齐与视觉意图。',2),
+ make('TY05','Type Grid Reflow','字块重排','TYPE / LAYOUT','多组短标题从独立单元形成一个整体信息网格。','三列卡片共享基线、间距与字体系统。','先建立分栏，再让每个字块通过位移和揭示进入目标单元。','网格先建立约 300ms，字块错位 90ms；收束后留屏。','适合多品牌比较、三类概念、双语标题结构。','不要在网格未形成之前就显示全部文字，也不要任意改变字号。',2),
+ make('TY06','Numeric Typography','数字计数排版','TYPE / NUMBER','数字既是信息，也是强势的排版主角。','一个超大数字、一个清晰单位、一个必要来源/说明层级。','标题先稳住基线；数字从 0 计到示例终值；单位在结尾短暂揭示。','计数 700–1200ms，最终数值额外停留 1.5s。','适合增长、累计、里程碑、渗透率等单一重要 KPI。','不要以动画数值替代核验数据；不能让数字跑到错误的百分比或单位。',2),
+ make('TY07','Split-Line Composition','文字分屏拼接','TYPE / CONTRAST','两组文字共享栅格并对位，形成对比关系。','画面横向二分，各自内容在本侧的裁切窗口出现。','两侧沿不同轴向进入，但最终严格匹配标题基线。','两组动作相差 100ms 内；完成后需要完整比较窗口。','适合 BEFORE / AFTER、LOCAL / GLOBAL 等对照。','避免上下左右同时乱动；两侧字号与留白不能失衡。',2),
+ make('TY08','Typography as Transition','大字作为转场','TYPE / TRANSITION','让标题成为转场的色块或遮罩，而非转场结束后才出现。','超大单词横贯舞台，字形周围有大块干净背景。','先出现文字，接着大色块从同方向覆盖，完成场景逻辑过渡。','标题 450ms、色块 550ms、下一镜头根据共享锚点承接。','适合片头到第一章节、结论到案例、品牌与数据段落衔接。','不要用纯闪白或无缘由拉伸替代设计过渡。',3),
+ make('GR01','Modular Card Cascade','模块卡片递进','GRAPHIC / MODULAR','把静态卡片的网格逻辑转换成有顺序的色块揭示。','三列固定宽度卡片；统一外边距、内边距与底部标签。','每列由矩形裁切从左到右依次打开，文本在块内二次入场。','卡片 480–660ms，列错位 90–130ms。','适合产品特征、三家品牌策略、功能模块等多栏目叙事。','禁止卡片随机飞入、不同列使用不同转场、阴影层级失控。'),
+ make('GR02','Axis-Led Wipe','基线引导擦除','GRAPHIC / WIPE','用一条水平基线把新旧内容接起来，使转场有原因。','水平线横贯网格，下一信息块的起点依附于同一基线。','细线延展→矩形色块沿轴生长→文字进入色块。','线 400ms、色块 600ms、文字 450ms，允许叠加。','适合图表开场、章节切换、信息面板连接。','不使用无来源的扫描光束、镜头抖动或随机粒子。',2),
+ make('GR03','Geometric Morph','几何形态变换','GRAPHIC / SHAPE','一个几何对象在位置不漂移的情况下切换轮廓语义。','主形状居中，标签和标尺静止，对比观察形态变化。','圆角从 50% 收束为切角矩形；尺寸和中心位置保持连续。','形态过渡 650–900ms；变化后的状态保持。','适合图标状态变化、产品模块的抽象表达。','切忌体积突然消失或颜色、位置、形状同时改变造成识别困难。',2),
+ make('GR04','Match-Move Anchor','共享锚点转场','GRAPHIC / CONTINUITY','上一元素的空间位置变成下一元素的起点。','保持共享坐标位置：横线、起点标记或指标标签。','先延伸共享基线，再揭示新图表或卡片，不清屏硬切。','共享元素动作 400–700ms，下一场延迟约 100ms。','适合从宏观概念进入具体数据、地图进入指标卡。','不要断开线条或随意改变坐标，以致观众丢失空间参照。',3),
+ make('GR05','Grid Reconfiguration','网格重组','GRAPHIC / REORDER','一组独立模块在同一二维坐标系内重排。','严格定义 4×3 网格；卡片移动后边缘与间距统一。','每个模块从明确的离散位移回到目标网格；线性移动叠加轻微错位。','主体移动 550–850ms；最多两组节奏。','适合分类重排、抽象系统架构与信息归档。','避免随机散开、重叠遮挡文字、模块尺寸不守网格。',3),
+ make('GR06','Layered Parallax','分层视差推移','GRAPHIC / DEPTH','通过不同层次的速度制造轻量深度，不一定需要 3D 引擎。','前景主卡、次级细节与背景线稿保持明确层次。','相同方向但不同距离的平面位移，前景幅度大于背景。','400–800ms；背景速度约前景的一半作为实验起点。','适合汽车摄影+信息叠加、品牌页面、轻量 2.5D 场景。','不要让景深或视差干扰文字阅读；背景不能突然反方向滑走。',2),
+ make('GR07','Editorial Split Screen','编辑式分屏转场','GRAPHIC / SPLIT','把一个叙事场景拆成左右两个相互呼应的视觉区域。','左右 52/48 分割；色块、标题、辅助指标统一对齐。','两块从相反方向裁切入场，局部文字随后出现。','左右区域间隔 80ms，字幕跟随 120ms。','适合产品与环境、策略与结果、过去与未来的并置。','不要做无意义 3D 翻页，也不要每次分屏都重新定义基准线。',2),
+ make('GR08','Shape-to-Label','图形扩展为信息标签','GRAPHIC / MICRO','把点、线、面演化为一条可以承载信息的注释条。','单个图标连接到长条标签，背景主体保持静止。','先确定几何起点，再横向伸展，文字经裁切露出。','图形 300ms、伸展 500ms、文本 350ms。','适合地图标注、车身结构标识、交互式说明。','避免标签出现前线条乱窜；标注不能与目标位置断开。',2),
+ make('IN01','Comparative Bar Build','比较条形图','DATA / COMPARISON','先明确比较维度，再按一致零基线建立可读的数据条形。','分类标签左对齐，所有条形共享零点与比例尺。','轴线先出现，三组条形按序延展到示例值，最终数值停留。','轴线 200ms、条形约 600ms、每组错位 110ms。','适合对比不同地区、不同品牌在同一指标上的差异。','严禁不同量纲混排，严禁为戏剧性随意截断零点。',2),
+ make('IN02','Synchronized KPI Counter','指标计数群组','DATA / KPI','数字与文字的优先级统一；多个 KPI 共同构成横向信息结构。','三列 KPI，数字最大、指标次之、单位最小。','背景卡片稳定；数字分别计到示例目标；最终统一停留。','数字计数 700ms，错位约 90ms，停留至少 1.5s。','适合首页指标、章节总结、业务规模概览。','不得以模糊/乱跳数字营造假“科技感”；同屏计数需有同步关系。',2),
+ make('IN03','Line Chart Draw-on','折线增长揭示','DATA / TREND','趋势要由坐标、刻度、曲线与关键点共同说明。','坐标轴固定，曲线在独立 SVG 路径中绘制，末端数字标注。','先显示坐标系，再用 path length 绘制走势，关键点依次出现。','轴线先行 300ms、曲线 850–1200ms、末端注释 300ms。','适合趋势变化、阶段增长、历史比较。','不要省略纵轴意义，也不要将虚构数据当作真实结论。',3),
+ make('IN04','Dot-Matrix Distribution','点阵分布递进','DATA / DISTRIBUTION','通过重复标记形成整体与局部的数量感。','点阵规则排列，重要一组与其他组通过颜色而非尺寸区分。','按列逐步点亮，先看总体，再强调一个子集。','点阵分组 40–80ms，最终维持完整状态。','适合类别占比、群体概念、模块完成度。','面积/点数必须与数据一致；示例点阵不可冒充统计事实。',2),
+ make('IN05','Milestone Timeline','时间轴节点','DATA / SEQUENCE','用一致尺度和明确先后顺序讲述多个里程碑。','横轴上四个节点均匀分布；节点名称与标注距离一致。','主线从左至右生长，节点按先后揭示，最后突出当前节点。','主线约 1000ms，节点间隔 250–350ms。','适合品牌历程、出海进入顺序、技术路线。','不应把非等距年份画成等距时间轴而不做说明。',2),
+ make('IN06','Slope Graph Comparison','坡度变化比较','DATA / CHANGE','用线的斜率强调起点与终点之间的相对变化。','左右两列是同一组量纲与范围，连线映射相同标签。','先出现左右端点，再绘制连接线，最后突出最重要变化。','端点 300ms、连接线 650ms、强调约 250ms。','适合同一指标的前后比较与排名变化。','必须区分百分数变化与百分点变化，杜绝任意调整纵轴。',3),
+ make('IN07','System Flow Reveal','系统流程逐级揭示','DATA / FLOW','将多步骤的因果或输入输出关系拆解为流动的路径。','左中右三阶段固定，箭头与文字对应；避免跨线。','节点先稳定，连接线按逻辑方向生长，然后重点节点高亮。','阶段延迟约 200ms，主链接约 600ms。','适合供应链、本地化生产、渠道结构与技术流程。','不要把“相关性”画成“因果链”，不要让箭头与逻辑相反。',3),
+ make('IN08','Hierarchical Treemap','矩形分布层级','DATA / COMPOSITION','以面积关系组织构成，但层级与标签优先于特效。','同一容器内使用嵌套矩形与标题标签，面积比例保持一致。','先形成整体边框，分组按面积逐个出现，最终显示名称。','模块 500–800ms，错位 120ms。','适合预算结构、业务构成、区域分布。','若尺寸编码真实数据，面积必须精准映射；不能用设计占位比例发布。',3),
+ make('AD01','Industrial Signal','工业操作手册','ART / TRA','酸绿、炭黑、安全橙与工程栅格，强调系统、可靠与精密。','16:9 / 12 列网格；断角技术框线；极细辅助标签与高对比超粗字。','线条扫描→模块展开→技术标签揭示，背景保持稳定。','理性节奏，尽量 500–800ms 以内，禁止弹性过冲。','汽车技术、工业产品、工程科普、赛车车辆参数卡。','杜绝发光描边、假 HUD、无意义复杂线路和随机故障效果。',2),
+ make('AD02','Electric Editorial','电蓝荧黄编辑设计','ART / PRA','电蓝与荧黄大块碰撞；以巨型字级、裁切图形和色块重组为主要语言。','大胆且严格的非对称网格，正文少而准确，标题有强视觉势能。','超大字体遮罩、色块擦除、模块重组，统一横向全局运动。','相对利落的快切，进入 350–550ms，保持 1200ms。','商业科技、财经视频、消费品牌广告及栏目包装。','不能只有高饱和颜色而没有排版纪律；禁止炫目闪屏。',2),
+ make('AD03','Quiet Swiss Grid','克制瑞士网格','ART / SWISS','留白、黑色无衬线与少量高纯度强调色，重视逻辑与比例。','精密十二栏、明确左对齐、强烈字级差；不堆装饰。','轻量滑移、基线扩展与慢一点的字距变化。','进入 600–900ms，延长阅读停留；尽量避免额外特效。','品牌战略、研究报告、高端作品集及产品故事。','“简约”不是信息不足；不能让主次级字号全部相同。',2),
+ make('AD04','Monochrome Newsroom','黑白新闻编辑','ART / NEWS','黑白对比、新闻版式、粗体数据字和少量警示标记。','清晰页眉页脚、可追溯日期/来源位置、有限色彩。','版面切换优先线性擦除和标题升入，不做新闻花字噪音。','快但稳定的 400–650ms 过渡。','金融新闻、产业动态、案例拆解。','新闻表达不能用视觉动效制造超出证据的确定性。',2),
+ make('AD05','Footage-led Overlay','真实影像 + 编辑图形','ART / HYBRID','优先保持真实影像摄影品质，只用必要的平面注释增强信息。','保留摄影画面主体，标题置于负空间，数据标签对齐安全区。','影像可以小幅视差；文字与线框分层进入。','字卡 450–700ms，说明性注释比主标题后 100ms 出现。','实拍赛车、工厂、采访、纪录片和品牌影像。','禁止让图形遮住主体，拒绝过量文字和强磨皮/HDR素材。',3),
+ make('AD06','Spatial Technical','2.5D 空间技术','ART / SPATIAL','3D 物件与二维注释并存，使用透视、层次和技术标注制造空间理解。','空间主物件 65%，信息注释位于空间外侧；标注深度逻辑一致。','分层视差+共享锚点；信息线始终连着正确结构部位。','主物件 850ms，技术标注 450ms，稳定留屏。','车辆结构、硬件产品、机械技术解释。','不为立体感扭曲真实车辆尺寸，不让标签随摄像机漂移。',3),
+ make('AD07','Tactile Minimalism','触感极简','ART / TACTILE','低饱和背景、柔和材料、简洁几何和节制的物理感。','少量物件、留白与优雅字级；用材质差异提供层次。','柔缓位移和微弱压缩回弹，但保留单一主要运动。','约 750–1100ms，柔和平滑。','消费电子、生活方式品牌、产品概念演示。','避免胶皮感、大幅果冻抖动以及无意义的弹簧。',2),
+ make('AD08','Motorsport Broadcast','赛车信息系统','ART / SPORT','高对比安全橙、赛道网格、简洁技术曲线，强调速度与可靠参数。','车型或抽象车辆为中心，速度/结构信息有明确角标位置。','水平高速擦除、工程线延展、快而准的数字切换。','入场 320–540ms，核心参数至少留屏 1.4s。','GT3、WEC、汽车产品科技与赛事视频。','不能伪造赛事数据，不能用动态镜头破坏车型真实比例。',3)
+];
+const getStudy=(id)=>studies.find(x=>x.id===id);
+const state={domain:'TY',study:'TY01',palette:'tra',energy:2,duration:540,stagger:100,ease:'precision',direction:'up',headline:'GO GLOBAL',grid:false,playing:false,playhead:0,loop:false};
+const PALETTES={tra:{name:'TRA',bg:'#242424',fg:'#d9fa39',hot:'#ff6500'},pra:{name:'PRA',bg:'#003cf5',fg:'#f7ff00',hot:'#f5f5f5'},editorial:{name:'EDITORIAL',bg:'#f3f2eb',fg:'#1d1e1e',hot:'#ff5b35'},mono:{name:'MONO',bg:'#f0f1ed',fg:'#151515',hot:'#d9fa39'}};
+const AD_PALETTE={AD01:'tra',AD02:'pra',AD03:'editorial',AD04:'mono',AD05:'sport',AD06:'sport',AD07:'mint',AD08:'sport'};
+const EASINGS={precision:{name:'Precision Out',css:'cubic-bezier(0.18, 0.82, 0.19, 1)',xy:[.18,.82,.19,1]},smooth:{name:'Smooth In-Out',css:'cubic-bezier(0.45, 0, 0.25, 1)',xy:[.45,0,.25,1]},linear:{name:'Linear',css:'linear',xy:[0,0,1,1]},snap:{name:'Snap Out',css:'cubic-bezier(0.11, 0.95, 0.22, 1)',xy:[.11,.95,.22,1]}};
+const DURATION=5200;
+const pos=(css,html)=>`<div style="position:absolute;${css}">${html}</div>`;
+const M=(motion,html,start=350,index=0,extra='')=>`<div class="m" data-motion="${motion}" data-start="${start}" data-index="${index}" ${extra}>${html}</div>`;
+const small=(s)=>`<span class="stage-small">${s}</span>`;
+const cap=(s)=>`<span class="label-mini">${s}</span>`;
+const line=(w='100%',height='2px',color='var(--sc-ink)',start=250)=>`<div class="m" data-motion="draw-width" data-start="${start}" style="height:${height};width:${w};background:${color};transform-origin:left"></div>`;
+const rect=(i,main,desc,fill)=>`<div style="background:${fill};color:var(--sc-bg);padding:1.6cqw;display:flex;flex-direction:column;justify-content:space-between;min-width:0;min-height:0"><span class="label-mini">0${i} / SYSTEM</span><strong style="font-size:4.1cqw;letter-spacing:-.07em;line-height:.94">${main}</strong><span class="label-mini">${desc}</span></div>`;
+const styleCard=(t,detail,fill='var(--sc-accent)',text='var(--sc-bg)')=>`<div style="background:${fill};color:${text};padding:1.6cqw;display:flex;justify-content:space-between;flex-direction:column;height:100%"><span class="label-mini">${detail}</span><strong style="font-size:5.3cqw;font-weight:1000;letter-spacing:-.07em;line-height:.9">${t}</strong><span class="label-mini">INDUSTRIAL DESIGN / 2026</span></div>`;
+function sceneTemplate(id){
+ const title=esc(state.headline.trim()||'GO GLOBAL');
+ switch(id){
+ case 'TY01':return pos('left:6%;top:23%',M('reveal-up',cap('01 / EDITORIAL TYPOGRAPHY'),160))+pos('left:6%;right:5%;top:35%',`<div class="display-mask">${M('reveal-up',`<div class="headline">${title}</div>`,490)}</div><div class="display-mask" style="margin-top:1.3cqw">${M('reveal-up',`<div class="headline" style="color:var(--sc-hot)">IN MOTION.</div>`,490,1)}</div>`)+pos('left:6%;right:6%;bottom:19%',line('100%','2px','var(--sc-ink)',750))+pos('right:6%;top:22%;text-align:right',M('scale',`<div style="width:4cqw;height:4cqw;background:var(--sc-hot)"></div>`,900));
+ case 'TY02':return pos('left:7%;top:23%',M('slide-x',cap('02 / STAGGERED WORDS'),100))+[0,1,2].map((i)=>pos(`left:${8+i*5}%;top:${32+i*15}%`,M('reveal-up',`<span style="font-size:8.5cqw;font-weight:1000;letter-spacing:-.075em;line-height:.92">${['MOVE.','BUILD.','REDEFINE.'][i]}</span>`,400,i))).join('')+pos('right:7%;top:30%;width:11%',M('draw-width',`<div style="height:1px;background:var(--sc-ink);width:100%"></div>`,300));
+ case 'TY03':return pos('left:7%;top:21%',cap('03 / SPACING AS MOTION'))+pos('left:6%;right:5%;top:41%;text-align:center',M('tracking',`<span style="display:block;font-size:11cqw;font-weight:1000;line-height:1;white-space:nowrap">PRECISION</span>`,330,0,'data-dur="880"'))+pos('left:12%;right:12%;top:63%',line('100%'))+pos('left:6%;bottom:20%',M('reveal-up',cap('TYPE SYSTEM / TRACKING / 001'),830));
+ case 'TY04':return pos('left:-6%;top:29%;width:135%;white-space:nowrap;overflow:hidden',M('slide-x',`<div class="giant" style="font-size:22cqw;color:var(--sc-ink)">SCALE.</div>`,350,0,'data-dur="820"'))+pos('left:7%;top:26%',M('reveal-up',`<span class="badge-number label-mini">04 / EDITORIAL CROP</span>`,1100))+pos('right:6%;bottom:20%;text-align:right',M('reveal-up',cap('DESIGN BEYOND THE FRAME'),1200));
+ case 'TY05':return pos('left:6%;top:23%',M('reveal-up',cap('05 / TYPE GRID / THREE COLUMNS'),120))+pos('left:6%;right:6%;top:34%;height:40%;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5cqw', ['THINK','DESIGN','MOVE'].map((t,i)=>`<div style="height:100%;border-top:2px solid var(--sc-ink);padding-top:2cqw">${M('slide-y',`<div style="font-size:5.4cqw;letter-spacing:-.06em;font-weight:1000">${t}</div>`,360,i)}<div style="height:60%;display:flex;align-items:end;justify-content:space-between"><span class="label-mini">0${i+1}/03</span>${M('scale',`<span style="display:block;width:3.2cqw;height:3.2cqw;border:1px solid var(--sc-ink);background:${i===1?'var(--sc-hot)':'transparent'}"></span>`,720,i)}</div></div>`).join(''));
+ case 'TY06':return pos('left:7%;top:25%',cap('06 / NUMERIC TYPOGRAPHY — EXAMPLE ONLY'))+pos('left:7%;top:41%;display:flex;align-items:baseline;gap:2cqw',M('count',`<span class="numeric">0</span>`,480,0,'data-from="0" data-to="75" data-suffix="%" data-decimals="0" data-dur="1100"'))+pos('right:7%;top:54%;width:19%',M('reveal-up',`<div style="font-weight:900;font-size:2.7cqw">SIGNAL<br>STRENGTH</div><div style="font-size:1cqw;margin-top:1cqw">DUMMY VALUE / NOT FOR PUBLICATION</div>`,1150))+pos('left:7%;right:7%;bottom:20%',line('100%','2px','var(--sc-hot)',850));
+ case 'TY07':return pos('left:5%;right:5%;top:32%;height:45%;display:flex',`<div style="flex:1;border-right:1px solid var(--sc-ink);padding:1.5cqw 2cqw">${cap('07 / LOCAL')}${M('reveal-left',`<div style="font-size:8cqw;font-weight:1000;letter-spacing:-.08em;margin-top:2cqw">LOCAL</div>`,370)}${M('reveal-up',cap('STRATEGY'),920)}</div><div style="flex:1;padding:1.5cqw 2cqw">${cap('08 / GLOBAL')}${M('reveal-right',`<div style="font-size:8cqw;font-weight:1000;letter-spacing:-.08em;margin-top:2cqw">GLOBAL</div>`,370,1)}${M('reveal-up',cap('EXPANSION'),930)}</div>`);
+ case 'TY08':return pos('left:6%;top:24%',cap('08 / TYPOGRAPHY AS TRANSITION'))+pos('left:5%;top:39%;width:125%',M('reveal-left',`<div class="giant" style="font-size:14cqw">TRANSFORM.</div>`,370))+pos('left:0;top:61%;width:100%;height:18%;overflow:hidden',M('wipe',`<div style="width:100%;height:100%;background:var(--sc-hot);color:var(--sc-bg);display:flex;align-items:center;justify-content:flex-end;padding-right:6%;font-size:3.5cqw;font-weight:1000">NEXT CHAPTER →</div>`,1080,0,'data-dur="870"'));
+ case 'GR01':return pos('left:6%;top:21%',M('reveal-up',`<div class="medium-title">THREE MODULES.</div>`,220))+pos('left:6%;right:6%;top:43%;bottom:21%;display:grid;grid-template-columns:repeat(3,1fr);gap:1.2cqw',[0,1,2].map((i)=>M('reveal-left',rect(i+1,['MARKET','SYSTEM','VISION'][i],['ANALYZE','DESIGN','LAUNCH'][i],['var(--sc-accent)','var(--sc-hot)','var(--sc-accent)'][i]),450,i)).join(''));
+ case 'GR02':return pos('left:7%;top:26%',cap('02 / AXIS-LED TRANSITION'))+pos('left:7%;right:7%;top:47%',line('100%','3px','var(--sc-ink)',330))+pos('left:7%;top:48%;height:25%;width:57%',M('wipe',`<div style="height:100%;width:100%;background:var(--sc-accent);color:var(--sc-bg);padding:2cqw;font-size:5cqw;font-weight:1000;letter-spacing:-.06em">FROM → TO</div>`,680,0,'data-dur="720"'))+pos('right:7%;top:58%;text-align:right',M('reveal-up',cap('BUILD FROM A SHARED AXIS'),1130));
+ case 'GR03':return pos('left:8%;top:26%',cap('03 / MORPH / GEOMETRY'))+pos('left:38%;top:27%;width:25cqw;height:25cqw',M('morph',`<div style="width:100%;height:100%;background:var(--sc-accent);position:relative"><div style="position:absolute;inset:25%;border:2px solid var(--sc-bg)"></div></div>`,420,0,'data-dur="1000"'))+pos('right:7%;bottom:21%',M('reveal-up',cap('ONE OBJECT / TWO STATES'),1320));
+ case 'GR04':return pos('left:7%;top:22%',cap('04 / SHARED ELEMENT / MATCH MOVE'))+pos('left:7%;top:38%',M('reveal-up',`<div class="medium-title">ONE ANCHOR.</div>`,260))+pos('left:7%;right:7%;top:57%',line('100%','2px','var(--sc-ink)',730))+pos('left:36%;top:53%;width:5.7cqw;height:5.7cqw',M('scale',`<div style="width:100%;height:100%;border:2px solid var(--sc-ink);background:var(--sc-hot)"></div>`,960))+pos('right:8%;bottom:22%',M('reveal-up',cap('ONE CONTINUOUS COORDINATE'),1380));
+ case 'GR05':return pos('left:6%;top:20%',cap('05 / SYSTEM GRID / 4 × 3'))+pos('left:12%;right:12%;top:29%;bottom:22%;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);gap:.9cqw',Array.from({length:12},(_,i)=>M('reorder',`<div style="width:100%;height:100%;border:1px solid var(--sc-ink);background:${[0,3,5,9].includes(i)?'var(--sc-hot)':'var(--sc-accent)'};color:var(--sc-bg);padding:1cqw;font-weight:950;font-size:1.1cqw">${String(i+1).padStart(2,'0')}</div>`,330,i,'data-dur="1050" data-shift="'+(i%4-1.5)+'"')).join(''));
+ case 'GR06':return pos('left:6%;top:20%',cap('06 / 2.5D / LAYERED PARALLAX'))+pos('left:10%;right:10%;top:32%;bottom:21%',[0,1,2].map((i)=>pos(`left:${i*24}%;top:${[14,0,9][i]}%;width:${[33,38,31][i]}%;height:${[67,90,76][i]}%;z-index:${i+1}`,M('parallax',styleCard(['READ','BUILD','MOVE'][i],`0${i+1} / DEPTH`,['var(--sc-accent)','var(--sc-hot)','var(--sc-accent)'][i]),380,i,`data-distance="${[25,55,85][i]}"`))).join(''));
+ case 'GR07':return pos('left:6%;top:22%',cap('07 / EDITORIAL / SPLIT SCREEN'))+pos('left:6%;right:6%;top:32%;bottom:20%;display:flex',M('reveal-left',`<div style="width:100%;height:100%;padding:2cqw;background:var(--sc-accent);color:var(--sc-bg);display:flex;justify-content:space-between;flex-direction:column"><span class="label-mini">LEFT / THE INPUT</span><strong style="font-size:6.5cqw;letter-spacing:-.08em">PLAN.</strong><span class="micro">01 — STRATEGY</span></div>`,370)+M('reveal-right',`<div style="width:100%;height:100%;padding:2cqw;background:var(--sc-hot);color:var(--sc-bg);display:flex;justify-content:space-between;flex-direction:column"><span class="label-mini">RIGHT / THE OUTPUT</span><strong style="font-size:6.5cqw;letter-spacing:-.08em">BUILD.</strong><span class="micro">02 — DELIVERY</span></div>`,370,1));
+ case 'GR08':return pos('left:7%;top:22%',cap('08 / SHAPE-TO-LABEL'))+pos('left:9%;top:44%;width:12cqw;height:12cqw',M('morph',`<div style="height:100%;width:100%;background:var(--sc-hot)"></div>`,360))+pos('left:20%;top:44%;width:60%;height:12cqw',M('grow-right',`<div style="height:100%;background:var(--sc-accent);color:var(--sc-bg);display:flex;align-items:center;padding:0 2cqw;font-weight:1000;font-size:4.3cqw;letter-spacing:-.065em;white-space:nowrap">SYSTEM READY</div>`,670,0,'data-dur="850"'))+pos('left:9%;bottom:20%',M('reveal-up',cap('ICON → LINE → INFORMATION'),1280));
+ case 'IN01':return pos('left:7%;top:19%',cap('01 / COMPARATIVE BARS — DEMO VALUES'))+pos('left:7%;top:27%',M('reveal-up',`<div style="font-size:4.5cqw;font-weight:1000;letter-spacing:-.05em">THREE PATHS.</div>`,240))+pos('left:7%;right:7%;top:45%;bottom:20%;display:flex;flex-direction:column;justify-content:space-between',[['A / 68',68],['B / 44',44],['C / 82',82]].map((x,i)=>`<div style="display:grid;grid-template-columns:12% 1fr 13%;gap:1cqw;align-items:center;height:7cqw"><span class="stage-small">${x[0].slice(0,1)}</span><div class="bar-track" style="height:5cqw;background:var(--sc-line)">${M('draw-width',`<div style="width:${x[1]}%;height:100%;background:${i===1?'var(--sc-hot)':'var(--sc-accent)'}"></div>`,550,i)}</div><b style="font-size:2.6cqw;text-align:right">${x[1]}</b></div>`).join(''));
+ case 'IN02':return pos('left:7%;top:23%',cap('02 / KPI SET — ILLUSTRATIVE DATA'))+pos('left:7%;top:35%',M('reveal-up',`<div style="font-size:5cqw;font-weight:1000;letter-spacing:-.06em">IMPACT BY NUMBERS.</div>`,200))+pos('left:7%;right:7%;top:52%;bottom:19%;display:grid;grid-template-columns:repeat(3,1fr);gap:1.3cqw',[['2.4','M','EVENTS'],['38.2','%','GROWTH'],['91.2','%','ACCURACY']].map((x,i)=>`<div style="border-top:2px solid var(--sc-ink);padding-top:1.1cqw">${M('count',`<span style="display:block;font-size:6.5cqw;font-weight:1000;letter-spacing:-.07em">0</span>`,500,i,`data-to="${x[0]}" data-suffix="${x[1]}" data-decimals="${x[0].includes('.')?1:0}" data-dur="1050"`)}<span class="label-mini">${x[2]}</span></div>`).join(''));
+ case 'IN03':return pos('left:7%;top:18%',cap('03 / TREND / SYNTHETIC SERIES'))+pos('left:7%;top:24%',M('reveal-up',`<div class="medium-title">GROWTH.</div>`,180))+pos('left:9%;right:9%;top:43%;bottom:20%',`<svg viewBox="0 0 700 190" preserveAspectRatio="none" width="100%" height="100%"><g class="chart-grid"><line x1="0" x2="700" y1="180" y2="180"/><line x1="0" x2="700" y1="122" y2="122"/><line x1="0" x2="700" y1="64" y2="64"/><line x1="0" x2="700" y1="6" y2="6"/></g><path class="chart-line" d="M 2 175 L 76 163 L 148 140 L 213 149 L 310 102 L 387 121 L 472 81 L 553 55 L 625 66 L 694 14" data-motion="draw-svg" data-start="540" data-dur="1300" />${[[2,175],[310,102],[553,55],[694,14]].map((a,i)=>`<circle class="chart-dot" cx="${a[0]}" cy="${a[1]}" r="6" data-motion="scale-svg" data-start="${[550,930,1210,1600][i]}"/>`).join('')}</svg>`)+pos('right:8%;top:42%',M('reveal-up',`<span class="badge-number">↑ TREND</span>`,1850));
+ case 'IN04':return pos('left:7%;top:20%',cap('04 / DOT MATRIX — STRUCTURAL DEMO'))+pos('left:7%;top:29%',M('reveal-up',`<div class="medium-title">COMPOSITION.</div>`,250))+pos('left:7%;right:7%;top:49%;bottom:21%;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(4,1fr);gap:.7cqw',Array.from({length:48},(_,i)=>M('dot',`<div style="width:100%;height:100%;background:${i<17?'var(--sc-hot)':'var(--sc-accent)'}"></div>`,430,i,'data-dot-step="32"')).join(''));
+ case 'IN05':return pos('left:7%;top:22%',cap('05 / MILESTONE / TIMELINE'))+pos('left:7%;top:33%',M('reveal-up',`<div class="medium-title">A CLEAR ROUTE.</div>`,240))+pos('left:9%;right:9%;top:61%',line('100%','3px','var(--sc-ink)',490))+pos('left:9%;right:9%;top:53%;display:flex;justify-content:space-between',[0,1,2,3].map((i)=>M('scale',`<div style="display:flex;flex-direction:column;align-items:center;gap:1cqw"><div style="background:${i===3?'var(--sc-hot)':'var(--sc-accent)'};width:4cqw;height:4cqw;border:1px solid var(--sc-bg)"></div><span class="label-mini">PHASE 0${i+1}</span></div>`,660,i,'data-dur="420"')).join(''));
+ case 'IN06':return pos('left:7%;top:21%',cap('06 / SLOPE / SIMULATED VALUES'))+pos('left:7%;top:31%',M('reveal-up',`<div style="font-size:4.8cqw;font-weight:1000;letter-spacing:-.06em">BEFORE / AFTER</div>`,220))+pos('left:11%;right:11%;top:45%;bottom:22%',`<svg viewBox="0 0 690 170" width="100%" height="100%" preserveAspectRatio="none"><line x1="0" x2="0" y1="0" y2="168" class="chart-grid"/><line x1="690" x2="690" y1="0" y2="168" class="chart-grid"/>${['M 5 140 L 680 35','M 5 55 L 680 88','M 5 105 L 680 122'].map((d,i)=>`<path d="${d}" class="chart-line" style="stroke:${i===1?'var(--sc-hot)':'var(--sc-accent)'}" data-motion="draw-svg" data-start="${480+i*190}" data-dur="850"/>`).join('')}</svg>`)+pos('left:11%;bottom:16%',cap('BASELINE'))+pos('right:11%;bottom:16%',cap('ENDLINE'));
+ case 'IN07':return pos('left:7%;top:20%',cap('07 / SYSTEM FLOW / LOGIC FIRST'))+pos('left:7%;top:30%',M('reveal-up',`<div class="medium-title">INPUT → OUTPUT.</div>`,200))+pos('left:7%;right:7%;top:54%;bottom:22%',`<div style="display:grid;grid-template-columns:repeat(3,1fr);align-items:center;height:100%;gap:3cqw">${['RESEARCH','STRATEGY','RESULT'].map((t,i)=>M('reveal-up',`<div style="height:100%;border:1px solid var(--sc-ink);padding:1.3cqw;display:flex;flex-direction:column;justify-content:space-between;background:${i===2?'var(--sc-accent)':'transparent'};color:${i===2?'var(--sc-bg)':'var(--sc-ink)'}"><span class="label-mini">STEP / 0${i+1}</span><b style="font-size:2.5cqw">${t}</b></div>`,420,i)).join('')}</div>`)+pos('left:7%;top:51%;width:86%',line('100%','2px','var(--sc-hot)',1000));
+ case 'IN08':return pos('left:7%;top:20%',cap('08 / TREEMAP — NOT TO SCALE'))+pos('left:7%;top:27%',M('reveal-up',`<div class="medium-title">DISTRIBUTION.</div>`,220))+pos('left:7%;right:7%;top:46%;bottom:19%;display:grid;grid-template-columns:5fr 3fr 2fr;gap:1cqw',[['GROUP A','52', 'var(--sc-accent)'],['GROUP B','31','var(--sc-hot)'],['GROUP C','17','var(--sc-quiet)']].map((x,i)=>M('reveal-up',`<div style="height:100%;background:${x[2]};color:var(--sc-bg);padding:1cqw;display:flex;flex-direction:column;justify-content:space-between"><b class="label-mini">${x[0]}</b><strong style="font-size:${i===0?7:4.5}cqw;font-weight:1000;letter-spacing:-.07em">${x[1]}</strong></div>`,450,i)).join(''));
+ case 'AD01':return pos('left:7%;top:22%',cap('TRA / INDUSTRIAL SIGNAL SYSTEM'))+pos('left:7%;top:34%',M('reveal-up',`<div class="giant">SYSTEM.</div>`,280))+pos('left:7%;right:7%;top:59%',line('100%'))+pos('left:7%;right:7%;top:65%;height:16%;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:.5cqw',['RANGE','ENERGY','PAYLOAD'].map((t,i)=>M('reveal-left',`<div style="width:100%;height:100%;border:1px solid var(--sc-ink);padding:1cqw;background:${i===1?'var(--sc-hot)':'transparent'};color:${i===1?'var(--sc-bg)':'var(--sc-ink)'};display:flex;justify-content:space-between;align-items:center;font-weight:900;font-size:1.9cqw">${t}<b>0${i+1}</b></div>`,600,i)).join(''));
+ case 'AD02':return pos('left:7%;top:21%',cap('PRA / ELECTRIC EDITORIAL'))+pos('left:7%;top:34%',M('reveal-up',`<div class="giant" style="font-size:13.5cqw">FORWARD.</div>`,320))+pos('right:6%;top:27%;width:20%;height:22%',M('scale',`<div style="height:100%;width:100%;background:var(--sc-ink);color:var(--sc-bg);font-size:5cqw;letter-spacing:-.07em;font-weight:1000;padding:1.3cqw">03</div>`,710))+pos('left:7%;top:64%;right:7%;height:11%',M('wipe',`<div style="width:100%;height:100%;background:var(--sc-accent);color:var(--sc-bg);display:flex;align-items:center;padding:0 1.8cqw;font-size:2.4cqw;font-weight:950">DATA — STRATEGY — IMPACT</div>`,930));
+ case 'AD03':return pos('left:8%;top:21%',cap('QUIET SWISS / PRECISION GRID'))+pos('left:8%;top:37%',M('tracking',`<div style="font-size:8.2cqw;font-weight:1000;letter-spacing:-.08em;line-height:.9">LESS, BUT<br>BETTER.</div>`,370,0,'data-dur="990"'))+pos('right:8%;top:37%;width:14%;height:35%;border-left:1px solid var(--sc-ink);padding-left:2cqw',M('reveal-up',`<div style="font-size:1.3cqw;font-weight:850">A SYSTEM<br>OF CLARITY</div>`,940))+pos('left:8%;right:8%;bottom:19%',line('100%'));
+ case 'AD04':return pos('left:7%;top:22%',cap('THE NEWSROOM / INDUSTRY BULLETIN'))+pos('left:7%;top:31%',M('reveal-up',`<div style="font-size:8cqw;letter-spacing:-.075em;font-weight:1000;line-height:.85">THE BIG<br>PICTURE.</div>`,360))+pos('left:7%;right:7%;top:63%',line('100%','3px'))+pos('left:7%;bottom:19%',M('reveal-left',`<span class="badge-number">ANALYSIS / INDUSTRY</span>`,950))+pos('right:7%;bottom:20%',cap('PERSPECTIVE / NOT PREDICTION'));
+ case 'AD05':return pos('left:5%;top:21%',cap('FOOTAGE-LED / RETAIN PHOTOGRAPHIC INTEGRITY'))+pos('left:6%;right:30%;top:33%;bottom:18%;background:linear-gradient(135deg,#555e57,#252c2c 40%,#78806d);border:1px solid var(--sc-line);overflow:hidden',`<svg viewBox="0 0 720 300" style="position:absolute;inset:0;width:100%;height:100%" preserveAspectRatio="xMidYMid meet"><path d="M52 177 L100 134 L196 121 L265 89 L455 89 L535 126 L630 139 L675 178 L662 206 L61 207Z" stroke="#d2dcc5" stroke-width="4" fill="#242d29"/><path d="M250 100 L277 133 L486 133 L450 101Z" stroke="#a2af9c" stroke-width="3" fill="none"/><circle cx="172" cy="208" r="51" fill="#16191a" stroke="#9fa99a" stroke-width="7"/><circle cx="535" cy="208" r="51" fill="#16191a" stroke="#9fa99a" stroke-width="7"/><path d="M64 179 L656 179" stroke="#ef681d" stroke-width="10" /></svg><div style="position:absolute;bottom:1cqw;left:1cqw;color:#e7eddf;font-size:1cqw;font-weight:900">[ PLACEHOLDER VEHICLE / REPLACE WITH FOOTAGE ]</div>`)+pos('right:6%;top:34%;width:22%',M('reveal-up',`<div style="font-size:4.7cqw;font-weight:1000;letter-spacing:-.06em;line-height:.94">REAL<br>STORIES.</div><div style="font-size:1.2cqw;font-weight:900;margin-top:2cqw">GRAPHICS SUPPORT THE FRAME</div>`,620))+pos('left:6%;top:60%;width:42%',M('draw-width',`<div style="height:2px;background:var(--sc-hot)"></div>`,1000));
+ case 'AD06':return pos('left:7%;top:22%',cap('2.5D / TECHNICAL SPACE'))+pos('left:15%;top:32%;width:63%;height:45%;perspective:700px',`<div style="position:absolute;inset:0;transform:rotateX(18deg) rotateY(-15deg)">${[0,1,2].map((i)=>pos(`left:${i*7}%;top:${i*11}%;width:72%;height:67%;border:1px solid var(--sc-ink);background:${i===2?'var(--sc-accent)':'var(--sc-quiet)'};box-shadow:1cqw 1cqw 0 rgba(0,0,0,.18)`,M('parallax',`<div style="width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:1cqw;color:${i===2?'var(--sc-bg)':'var(--sc-ink)'}"><span class="label-mini">COMPONENT 0${i+1}</span><b style="font-size:4cqw;letter-spacing:-.07em">MODULE</b></div>`,390,i,`data-distance="${35+i*20}"`))).join('')}</div>`)+pos('right:7%;top:39%',M('reveal-up',cap('01 / HOUSING\n02 / CORE\n03 / OUTPUT'),1100));
+ case 'AD07':return pos('left:7%;top:22%',cap('TACTILE / MINIMAL MATERIALITY'))+pos('left:9%;top:41%',M('reveal-up',`<div style="font-size:6.4cqw;font-weight:1000;letter-spacing:-.07em;line-height:.9">FORM.<br>FEELING.</div>`,650))+pos('right:10%;top:31%;width:34cqw;height:34cqw',M('morph',`<div style="width:100%;height:100%;background:#d8e4ce;border:1px solid #9aab9b;box-shadow:1cqw 1.3cqw 2cqw rgba(25,46,35,.18);border-radius:30%;display:grid;place-items:center"><div style="width:42%;height:42%;border:1.2cqw solid #478264;border-radius:50%"></div></div>`,450,0,'data-dur="1100"'));
+ case 'AD08':return pos('left:7%;top:18%',cap('MOTORSPORT / DATA BROADCAST'))+pos('left:7%;top:29%',M('reveal-up',`<div class="giant" style="font-size:16cqw">APEX.</div>`,270))+pos('left:7%;right:7%;top:54%',line('100%','3px','var(--sc-hot)',650))+pos('left:7%;right:7%;top:60%;height:19%;display:grid;grid-template-columns:1.4fr 1fr .9fr;gap:1cqw',[['TRACK','SECTOR 01'],['VEHICLE','GT CLASS'],['STATUS','SYSTEM ON']].map((x,i)=>M('reveal-left',`<div style="height:100%;border:1px solid var(--sc-line);padding:1.2cqw;display:flex;flex-direction:column;justify-content:space-between"><span class="label-mini" style="color:var(--sc-hot)">${x[0]}</span><b style="font-size:2.5cqw">${x[1]}</b></div>`,650,i)).join(''));
+ default:return pos('left:8%;top:36%',`<div class="headline">MOTION STUDY.</div>`);
+ }
+}
+function clamp(x,a=0,b=1){return Math.max(a,Math.min(b,x));}
+function bezier(x1,y1,x2,y2,x){
+ const xx=t=>3*(1-t)*(1-t)*t*x1+3*(1-t)*t*t*x2+t*t*t;
+ const yy=t=>3*(1-t)*(1-t)*t*y1+3*(1-t)*t*t*y2+t*t*t;
+ let lo=0,hi=1; for(let i=0;i<22;i++){const mid=(lo+hi)/2; xx(mid)<x?lo=mid:hi=mid;} return yy((lo+hi)/2);
+}
+const easeP=x=>{let v=clamp(x);return bezier(...EASINGS[state.ease].xy,v);};
+let nodes=[];let raf=0;let playOrigin=0;let lastActive=0;
+function prepareNodes(){
+ nodes=[...DOM('stageScene').querySelectorAll('[data-motion]')];
+ for(const node of nodes){if(node.dataset.motion==='draw-svg'){
+   try{const length=node.getTotalLength();node.dataset.pathlen=String(length);node.style.strokeDasharray=length+' '+length;}catch(e){}
+ }}
+}
+function setTransform(node,x,y,scale=1,rot=0){node.style.transform=`translate3d(${x}px,${y}px,0) scale(${scale}) rotate(${rot}deg)`;}
+function updateFrame(t){
+ const stage=DOM('stage');const w=stage.clientWidth || 850;const s=w/840;
+ const dir={up:[0,1],down:[0,-1],left:[1,0],right:[-1,0]}[state.direction];
+ const amp={1:.64,2:1,3:1.38}[state.energy];const speed={1:1.25,2:1,3:.82}[state.energy];
+ for(const n of nodes){
+   let start=Number(n.dataset.start||350);const idx=Number(n.dataset.index||0);
+   if(n.dataset.dotStep){start+=idx*Number(n.dataset.dotStep);}
+   else{start+=idx*state.stagger;}
+   const dur=Number(n.dataset.dur||540)*(state.duration/540)*speed;
+   const p=clamp((t-start)/Math.max(dur,1));const e=easeP(p),q=1-e;
+   const kind=n.dataset.motion;
+   n.style.opacity='1';n.style.clipPath='none';n.style.letterSpacing='';
+   if(kind==='reveal-up'){
+     setTransform(n,dir[0]*45*q*s*amp,dir[1]*45*q*s*amp);n.style.opacity=String(clamp(p*2.1));
+     n.style.clipPath= state.direction==='left'?`inset(0 0 0 ${q*100}%)`:state.direction==='right'?`inset(0 ${q*100}% 0 0)`:state.direction==='down'?`inset(${q*100}% 0 0 0)`:`inset(0 0 ${q*100}% 0)`;
+   } else if(kind==='reveal-left'){
+     setTransform(n,32*q*s*amp,0);n.style.clipPath=`inset(0 ${q*100}% 0 0)`;
+   } else if(kind==='reveal-right'){
+     setTransform(n,-32*q*s*amp,0);n.style.clipPath=`inset(0 0 0 ${q*100}%)`;
+   } else if(kind==='slide-x'){
+     setTransform(n,-95*q*s*amp,0);n.style.opacity=String(clamp(p*2));
+   } else if(kind==='slide-y'){
+     setTransform(n,0,75*q*s*amp);n.style.opacity=String(clamp(p*1.8));
+   } else if(kind==='scale'){
+     setTransform(n,0,0,.72+.28*e);n.style.opacity=String(clamp(p*2));
+   } else if(kind==='draw-width'){
+     n.style.transform=`scaleX(${Math.max(e,.00001)})`;n.style.transformOrigin='left center';
+   } else if(kind==='wipe'||kind==='grow-right'){
+     n.style.clipPath=`inset(0 ${q*100}% 0 0)`;
+   } else if(kind==='tracking'){
+     n.style.letterSpacing=`${-.08+.36*q*amp}em`;n.style.opacity=String(clamp(p*2));
+   } else if(kind==='count'){
+     const to=Number(n.dataset.to||75),from=Number(n.dataset.from||0);let num=from+(to-from)*e;
+     const d=Number(n.dataset.decimals||0);const txt=num.toFixed(d)+(n.dataset.suffix||'');
+     const span=n.querySelector('span');if(span) span.textContent=txt; else n.textContent=txt;
+   } else if(kind==='morph'){
+     n.style.borderRadius=`${50*q}%`;n.style.overflow='hidden';setTransform(n,0,-16*q*s*amp,.87+.13*e,10*q);
+   } else if(kind==='draw-svg'){
+     const len=Number(n.dataset.pathlen||0);n.style.strokeDashoffset=String(len*q);
+   } else if(kind==='scale-svg'){
+     n.style.transformBox='fill-box';n.style.transformOrigin='center';n.style.transform=`scale(${e})`;n.style.opacity=String(e);
+   } else if(kind==='reorder'){
+     const x=(Number(n.dataset.shift||0))*54*q*s*amp;
+     const y=((idx%3)-1)*37*q*s*amp;
+     setTransform(n,x,y,.90+.10*e);n.style.opacity=String(clamp(p*2));
+   } else if(kind==='parallax'){
+     const dist=Number(n.dataset.distance||40);setTransform(n,-dist*q*s*amp,5*q*s);n.style.opacity=String(clamp(p*2));
+   } else if(kind==='dot'){
+     setTransform(n,0,0,.3+.7*e);n.style.opacity=String(clamp(p*3));
+   }
+ }
+ DOM('timeline').value=String(Math.round(t));
+ DOM('playerTime').textContent=`${(t/1000).toFixed(1)} / 5.2 s`;
+ DOM('stageProgress').textContent=`${(t/1000).toFixed(1).padStart(4,'0')} / 05.2`;
+ const blocks=Math.max(0,Math.min(8,Math.round(8*t/DURATION)));
+ const bar=DOM('stage').querySelector('.stage-progress-segments');if(bar)bar.textContent='▰'.repeat(blocks)+'▱'.repeat(8-blocks);
+}
+function frame(now){
+ if(!state.playing)return;
+ const t=Math.max(0,Math.min(DURATION,now-playOrigin));state.playhead=t;updateFrame(t);
+ if(t>=DURATION){state.playing=false;DOM('togglePlay').textContent='▶';return;}
+ raf=requestAnimationFrame(frame);
+}
+function play(){cancelAnimationFrame(raf);if(state.playhead>=DURATION)state.playhead=0;state.playing=true;playOrigin=performance.now()-state.playhead;DOM('togglePlay').textContent='Ⅱ';raf=requestAnimationFrame(frame);}
+function pause(){state.playing=false;cancelAnimationFrame(raf);DOM('togglePlay').textContent='▶';}
+function replay(){state.playhead=0;updateFrame(0);play();}
+function setStudy(id){
+ const s=getStudy(id);if(!s)return;
+ state.study=id;state.domain=s.domain;
+ renderTabs();renderIndex();renderStage();renderDescription();renderPrompt();replay();
+}
+function setDomain(id){const s=studies.find(x=>x.domain===id);if(s)setStudy(s.id);}
+function renderTabs(){DOM('domainTabs').innerHTML=domains.map((d,i)=>`<button class="domain-tab ${state.domain===d.id?'active':''}" data-domain="${d.id}" aria-pressed="${state.domain===d.id}"><span class="tab-index">0${i+1} / MODULE <span>08 STUDIES</span></span><span class="tab-title">${d.title}</span><span class="tab-cn">${d.cn} ↗</span></button>`).join('');}
+function renderIndex(){let a=studies.filter(s=>s.domain===state.domain);DOM('studyCount').textContent=String(a.length).padStart(2,'0');DOM('techList').innerHTML=a.map((s,i)=>`<button class="library-item ${s.id===state.study?'selected':''}" data-study="${s.id}" aria-pressed="${s.id===state.study}"><span class="library-num">${String(i+1).padStart(2,'0')}</span><span><span class="library-title">${s.en}</span><span class="library-sub">${s.cn}</span></span><span class="library-arrow">↗</span></button>`).join('');}
+function renderStage(){
+ const s=getStudy(state.study);
+ const key=s.domain==='AD'?AD_PALETTE[s.id]:state.palette;
+ DOM('stage').dataset.palette=key;
+ DOM('stageScene').innerHTML=sceneTemplate(s.id);
+ DOM('stageMonogram').textContent= s.domain==='AD'?s.en.toUpperCase().split(' ').slice(0,2).join(' / '):'MD / LAB';
+ DOM('stageTopRight').innerHTML=`${s.id} / MOTION STUDY <i class="stage-line"></i> 2026`;
+ DOM('stageBottomLeft').textContent=domains.find(d=>d.id===s.domain).className+' / '+s.en.toUpperCase();
+ DOM('sceneCounter').textContent=s.id+' / '+String(studies.findIndex(x=>x.id===s.id)+1).padStart(2,'0');
+ DOM('stage').classList.toggle('grid-on',state.grid);
+ DOM('gridToggle').setAttribute('aria-pressed',String(state.grid));
+ DOM('paletteLabel').textContent=key.toUpperCase();
+ DOM('paletteTip').textContent=s.domain==='AD'?'本章固定展示对应视觉体系的原生色彩；其他章节可自由切换色板。':'改变色彩，不改变当前镜头的版式与运动逻辑。';
+ DOM('paletteOptions').querySelectorAll('button').forEach(b=>{b.classList.toggle('selected',b.dataset.palette===state.palette);b.disabled=s.domain==='AD';});
+ prepareNodes();updateFrame(state.playhead);
+}
+function renderDescription(){const s=getStudy(state.study),d=domains.find(d=>d.id===s.domain);DOM('studyTitle').textContent=s.en+' / '+s.cn;DOM('studySummary').textContent=s.summary;DOM('studyTag').textContent=d.className;DOM('studyDifficulty').textContent='LEVEL / '+String(s.level).padStart(2,'0');DOM('intentText').textContent=s.intent;DOM('avoidText').textContent=s.avoid;
+ DOM('recipeGrid').innerHTML=[['01 / VISUAL STRUCTURE','平面结构',s.layout],['02 / BEHAVIOR','运动机制',s.behavior],['03 / TIMING','时间与节奏',s.timing]].map(x=>`<article class="recipe-item"><span class="recipe-kicker">${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p></article>`).join('');}
+function promptText(){
+ const s=getStudy(state.study);const paletteName=s.domain==='AD'?AD_PALETTE[s.id].toUpperCase():state.palette.toUpperCase();const d=domains.find(d=>d.id===s.domain);
+ return `# MOTION STUDY / ${s.id} — ${s.en} · ${s.cn}
+你担任 Motion Art Director + Remotion / GSAP 工程师。请先完成一个可编辑的 5.2 秒、16:9、1920×1080、30fps 设计实验，不要直接展开整片制作。
+
+【传播目标】
+${s.summary}
+
+【视觉风格 / ART DIRECTION】
+设计方向：${d.title}。演示色板：${paletteName}（属于视觉实验，不代表真实品牌官方 VI）。
+版式系统：${s.layout}
+主标题：${state.headline}（可调整行数与字级；不要变形拉伸字形）。
+层级：L1 核心标题或核心数字，L2 类别/结论，L3 来源/说明。设计上先固定栅格与阅读顺序。
+
+【运动机制 / BEHAVIOR】
+${s.behavior}
+主运动方向：${{up:'向上',down:'向下',left:'向左',right:'向右'}[state.direction]}；局部匹配转场应保持场景规定的锚点。
+入场时间：${state.duration}ms（可结合该场景固定特技进行比例缩放），错位间隔：${state.stagger}ms。
+曲线：${EASINGS[state.ease].css}（${EASINGS[state.ease].name}）。能量级别：${state.energy}/3；强调的是速度、位移与信息组数，不是特效叠加。
+场景专用时间建议：${s.timing}
+完整状态停留应留足阅读时间，建议至少 1.2–1.6 秒，并随配音与信息复杂度调整。
+
+【质量控制 / NEGATIVE CONSTRAINTS】
+${s.avoid}
+不要套用 PPT 风模板、随机飞入、炫光粒子、无意义 3D 翻转、默认外阴影与过量文字。尽可能使用固定栅格、二维几何和精准的形态约束。
+${s.domain==='IN'?'本实验所有数值属于教学演示。正式视频的数据必须来自可信源，并检查单位、比例尺、零基线与来源。':s.domain==='AD'?'当前参考仅提炼原创的通用视觉原则，不直接复制 TRA/PRA 的品牌 Logo 或原作品。':'不得将示意数字、占位卡片作为真实行业事实。'}
+
+【交付与验证】
+1. 首先生成一张 Style Frame（完整信息状态静帧）与版式参数表。
+2. 提交 Motion Tokens（位移 px、时长 ms、stagger、曲线、停留窗口）。
+3. 用可编辑 React/SVG/CSS 实现 Remotion 动画；网页交互可用 GSAP Timeline。每帧按时间确定输出，保证 Remotion 渲染一致性。
+4. 提供 5.2s motion proof、关键帧截图（0%、25%、60%、100%）、源码、QC 自查。
+5. 仅在本镜头审核通过后，扩展成同系列其他镜头。`;
+}
+function renderPrompt(){DOM('promptText').textContent=promptText();}
+function renderPaletteOptions(){DOM('paletteOptions').innerHTML=Object.entries(PALETTES).map(([id,p])=>`<button class="palette-btn ${state.palette===id?'selected':''}" data-palette="${id}" style="--p-bg:${p.bg};--p-fg:${p.fg};--p-hot:${p.hot}" title="${p.name}" aria-label="${p.name} 色板"></button>`).join('');}
+function renderCourseCards(){DOM('courseCards').innerHTML=domains.map((d,i)=>`<article class="course-card"><div class="course-card-num"><span>MODULE / 0${i+1}</span><span>08 TECHNIQUES</span></div><div><h3>${d.title}</h3><p>${d.focus}</p></div><button data-domain="${d.id}">EXPLORE ${d.cn} ↗</button></article>`).join('');}
+function downloadJSON(){const s=getStudy(state.study);const preset={version:'Motion Design Lab 02',name:s.en,id:s.id,aspectRatio:'16:9',resolution:'1920x1080',fps:30,previewDurationMs:DURATION,design:{palette:s.domain==='AD'?AD_PALETTE[s.id]:state.palette,headline:state.headline,layout:s.layout},motion:{energy:state.energy,entryMs:state.duration,staggerMs:state.stagger,curve:EASINGS[state.ease].css,mainDirection:state.direction,behavior:s.behavior},story:{summary:s.summary,timing:s.timing,intent:s.intent,avoid:s.avoid},dataNotice:'All visualization values shown in the demos are illustrative and must not be treated as source data.'};
+ const blob=new Blob([JSON.stringify(preset,null,2)],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`MDL02_${s.id}_Motion_Tokens.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);
+}
+async function copyText(){const button=DOM('copyPrompt'),txt=DOM('promptText').textContent;let ok=false;
+ try{if(navigator.clipboard){await navigator.clipboard.writeText(txt);ok=true;}}catch(e){}
+ if(!ok){const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();try{ok=document.execCommand('copy')}catch(e){}ta.remove();}
+ button.textContent=ok?'COPIED ✓':'SELECT TEXT TO COPY';if(!ok){const sel=window.getSelection(),r=document.createRange();r.selectNodeContents(DOM('promptText'));sel.removeAllRanges();sel.addRange(r);}setTimeout(()=>button.textContent='COPY PROMPT ↗',1700);
+}
+function syncMotion(){DOM('durationValue').textContent=state.duration+' MS';DOM('staggerValue').textContent=state.stagger+' MS';DOM('energyValue').textContent=String(state.energy).padStart(2,'0')+' / '+['','RESTRAINED','BALANCED','ENERGETIC'][state.energy];DOM('energyOptions').querySelectorAll('button').forEach(b=>b.classList.toggle('selected',Number(b.dataset.energy)===state.energy));renderPrompt();replay();}
+function init(){
+ renderPaletteOptions();renderCourseCards();
+ DOM('domainTabs').addEventListener('click',e=>{const b=e.target.closest('[data-domain]');if(b)setDomain(b.dataset.domain);});
+ DOM('techList').addEventListener('click',e=>{const b=e.target.closest('[data-study]');if(b)setStudy(b.dataset.study);});
+ DOM('courseCards').addEventListener('click',e=>{const b=e.target.closest('[data-domain]');if(b){setDomain(b.dataset.domain);window.scrollTo({top:DOM('domainTabs').getBoundingClientRect().top+scrollY-25,behavior:'smooth'});}});
+ DOM('paletteOptions').addEventListener('click',e=>{const b=e.target.closest('[data-palette]');if(b&&!b.disabled){state.palette=b.dataset.palette;renderStage();renderPrompt();replay();}});
+ DOM('headlineInput').addEventListener('input',e=>{state.headline=e.target.value;renderStage();renderPrompt();replay();});
+ DOM('energyOptions').addEventListener('click',e=>{const b=e.target.closest('[data-energy]');if(b){state.energy=Number(b.dataset.energy);syncMotion();}});
+ DOM('duration').addEventListener('input',e=>{state.duration=Number(e.target.value);syncMotion();});
+ DOM('stagger').addEventListener('input',e=>{state.stagger=Number(e.target.value);syncMotion();});
+ DOM('ease').addEventListener('change',e=>{state.ease=e.target.value;syncMotion();});
+ DOM('direction').addEventListener('change',e=>{state.direction=e.target.value;syncMotion();});
+ DOM('gridToggle').addEventListener('click',()=>{state.grid=!state.grid;DOM('stage').classList.toggle('grid-on',state.grid);DOM('gridToggle').setAttribute('aria-pressed',String(state.grid));});
+ DOM('togglePlay').addEventListener('click',()=>state.playing?pause():play());
+ DOM('replay').addEventListener('click',replay);
+ DOM('timeline').addEventListener('input',e=>{pause();state.playhead=Number(e.target.value);updateFrame(state.playhead);});
+ DOM('copyPrompt').addEventListener('click',copyText);
+ DOM('downloadPreset').addEventListener('click',downloadJSON);
+ document.addEventListener('keydown',e=>{if(e.code==='Space'&&!['INPUT','TEXTAREA','SELECT','BUTTON'].includes(document.activeElement.tagName)){e.preventDefault();state.playing?pause():play();}});
+ window.addEventListener('resize',()=>updateFrame(state.playhead));
+ const params=new URLSearchParams(location.search);
+ const requested=params.get('study');
+ setStudy(studies.some(item=>item.id===requested)?requested:'TY01');
+ if ((!requested && params.get('embed')==='1') || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  pause();
+  state.playhead=1800;
+  updateFrame(state.playhead);
+ }
+}
+document.addEventListener('DOMContentLoaded',init);
+
+</script>
+<script src="embed.js"></script></body></html>

@@ -1,0 +1,70 @@
+html.in-home { overflow: hidden; color-scheme: dark }
+html.in-home, .in-home body { margin: 0; min-height: 0; overflow-x: clip; scroll-behavior: auto }
+.in-home .global-header, .in-home .intro, .in-home .course-map, .in-home footer,
+.in-home .domain-tabs, .in-home .mast, .in-home .liblinks, .in-home .shell > header,
+.in-home .heading, .in-home body > .layout > .chapter { display: none }
+.in-home .app-shell, .in-home body > .layout, .in-home body > .shell { margin: 0; padding: 13px; max-width: none; min-height: 0 }
+.in-home .sidebar { min-height: 0 }
+.in-home .theater, .in-home .stagebox { min-width: 0 }
+.in-home .library-list { max-height: 375px; overflow: auto }
+.in-home .theater > .inspector-panel { margin-top: 13px }
+.in-home .mobile-study-picker { display: none }
+
+@media (max-width: 750px) {
+  .in-home .app-shell, .in-home body > .layout, .in-home body > .shell { padding: 8px }
+  .in-home .stagebox, .in-home .sidebar { padding: 8px }
+  .in-home .workspace, .in-home .main, .in-home .shell > .layout { gap: 9px }
+  .in-home .library-panel > .panel-head, .in-home .sidebar > .smallhead,
+  .in-home .layout > aside.panel:not(.right) > .sideHead,
+  .in-home :is(#techList, #studies, #items),
+  .in-home .stagehead .status { display: none }
+  .in-home .library-panel { padding: 8px }
+  .in-home .mobile-study-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 12px;
+  }
+  .in-home .mobile-study-picker select {
+    width: 100%;
+    border: 1px solid #596058;
+    border-radius: 6px;
+    padding: 6px 9px;
+    background: #242827;
+    color: #f1f4ed;
+  }
+  .in-home :is(select, input[type="text"]) { min-height: 44px; font-size: 16px }
+  .in-home input[type="range"] { width: 100%; min-height: 44px; margin-block: 0 }
+  .in-home :is(.player-bar, .controls, .playtop) button { min-width: 44px; min-height: 44px }
+  .in-home .player-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    height: auto;
+    gap: 4px 7px;
+  }
+  .in-home .player-time { margin-left: auto; font-size: 11px }
+  .in-home .timeline-wrap { flex: 1 0 100%; order: 3; padding-inline: 2px }
+  .in-home .player-bar .timeline-wrap input { min-height: 44px }
+  .in-home .inspector-panel { display: block; padding: 0 }
+  .in-home .inspector-panel .panel-head { min-height: 40px }
+  .in-home .control-group { padding-block: 8px; border-right: 0 }
+  .in-home .mobile-more-parameters summary {
+    padding: 12px 13px;
+    min-height: 44px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .in-home .controls {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    gap: 4px 6px;
+    margin-block: 8px 4px;
+  }
+  .in-home .controls .time { justify-self: end }
+  .in-home .controls #scrub { grid-column: 1 / -1; order: 0; min-width: 0 }
+  .in-home .controls #palette { grid-column: span 2; min-width: 0 }
+  .in-home .controls #png { white-space: nowrap }
+  .in-home .playtop { flex-wrap: wrap; gap: 4px; align-items: center }
+  .in-home .playtop .actions { flex-wrap: wrap; gap: 5px }
+}

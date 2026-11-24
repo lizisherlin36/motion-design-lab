@@ -1,0 +1,228 @@
+{
+  "schema_version": "1.1",
+  "library": "Motion Design Lab",
+  "chapter_id": "ch03",
+  "chapter": "CH03",
+  "title": "Data-Driven Motion",
+  "title_zh": "数据驱动动效",
+  "status": "chapter_ready_not_merged_into_site",
+  "style_tokens": {
+    "TRA": {
+      "background": "#242626",
+      "primary": "#D9FA39",
+      "accent": "#FF6500",
+      "paper": "#ECF0E9"
+    },
+    "PRA": {
+      "background": "#073AEF",
+      "primary": "#F8FF00",
+      "accent": "#FFFFFF",
+      "paper": "#111111"
+    },
+    "grid_columns": 12,
+    "safe_fraction": 0.06,
+    "fps": 30,
+    "main_animation_max_per_shot": 1,
+    "secondary_animation_max_per_shot": 1,
+    "easing": "cubic-bezier(0.18,0.82,0.19,1)",
+    "reading_hold_sec": "1.3–2.0",
+    "no": [
+      "random transitions",
+      "fake numbers",
+      "unmotivated bloom",
+      "meaningless camera movement",
+      "readability-breaking overlaps"
+    ]
+  },
+  "patterns": [
+    {
+      "id": "DM01",
+      "title_en": "Progressive Disclosure",
+      "title_zh": "数据递进揭示",
+      "family": "Narrative",
+      "motion_rule": "先坐标和口径，再系列，再比较结论",
+      "use_cases": "全部图表开场",
+      "recommended_duration": "800–1600ms",
+      "motion_tokens": "轴→数据→标注→结论，最多两组同时运动",
+      "failure_mode": "数字先动、观众还不知道口径"
+    },
+    {
+      "id": "DM02",
+      "title_en": "Ranked Bars",
+      "title_zh": "排序条形比较",
+      "family": "Ranking",
+      "motion_rule": "固定零基线，条长映射数值，排名变动保留对象身份",
+      "use_cases": "市场份额、销量排行",
+      "recommended_duration": "800–1600ms",
+      "motion_tokens": "条长与标签同一数值源，排序状态切换",
+      "failure_mode": "缩短横轴、夸张差距或排序错位"
+    },
+    {
+      "id": "DM03",
+      "title_en": "Line Path Tracing",
+      "title_zh": "时间序列追踪",
+      "family": "Trend",
+      "motion_rule": "时间轴不变，沿x方向逐步绘制真实数据路径",
+      "use_cases": "销量趋势、市场渗透",
+      "recommended_duration": "900–1800ms",
+      "motion_tokens": "只揭示已知点，标注带时期/单位",
+      "failure_mode": "用动画把折线变为不对应的数据形态"
+    },
+    {
+      "id": "DM04",
+      "title_en": "Scatter / Dot Morph",
+      "title_zh": "散点与比较图变换",
+      "family": "Distribution",
+      "motion_rule": "相同对象在两种坐标编码之间移动，点ID保持不变",
+      "use_cases": "相关性、市场分布",
+      "recommended_duration": "700–1500ms",
+      "motion_tokens": "位置依据同一数据记录，双轴清晰",
+      "failure_mode": "无意义的随机点运动冒充数据变化"
+    },
+    {
+      "id": "DM05",
+      "title_en": "Small Multiples",
+      "title_zh": "同尺度小倍图",
+      "family": "Multi-series",
+      "motion_rule": "多个品牌使用同一坐标和单位的小型图，按叙事逐项高亮",
+      "use_cases": "三大车企比较",
+      "recommended_duration": "700–1200ms",
+      "motion_tokens": "保留全体数据，切换高亮对象",
+      "failure_mode": "各卡片私设坐标上限导致误读"
+    },
+    {
+      "id": "DM06",
+      "title_en": "Slopegraph Compare",
+      "title_zh": "两时点斜率图",
+      "family": "Before-after",
+      "motion_rule": "两个时间节点间直接连接各品牌，强调相对变化",
+      "use_cases": "进出市场前后",
+      "recommended_duration": "800–1400ms",
+      "motion_tokens": "端点同单位、连线保持ID",
+      "failure_mode": "把不同定义的两期数据强行连接"
+    },
+    {
+      "id": "DM07",
+      "title_en": "Indexed Growth",
+      "title_zh": "基期指数化比较",
+      "family": "Normalization",
+      "motion_rule": "明确标注基期=100后比较增长路径",
+      "use_cases": "不同体量品牌增长速度",
+      "recommended_duration": "1000–1600ms",
+      "motion_tokens": "同时显示基期注释与当前指数",
+      "failure_mode": "误把指数当成销量绝对值"
+    },
+    {
+      "id": "DM08",
+      "title_en": "Timeline Event Annotation",
+      "title_zh": "事件时间轴注释",
+      "family": "Time events",
+      "motion_rule": "事件节点以日期、区域、类别递进出现",
+      "use_cases": "建厂、上市、合作、法规",
+      "recommended_duration": "800–1600ms",
+      "motion_tokens": "节点严格按真实日期和区间",
+      "failure_mode": "主观事件密度不按时间比例"
+    },
+    {
+      "id": "DM09",
+      "title_en": "Part-to-Whole Stack",
+      "title_zh": "整体构成堆叠",
+      "family": "Composition",
+      "motion_rule": "从总量到分项占比，始终保留总额和百分比口径",
+      "use_cases": "地区构成、车型结构",
+      "recommended_duration": "800–1400ms",
+      "motion_tokens": "合计百分比≈100%，单位统一",
+      "failure_mode": "分项求和与总值不一致"
+    },
+    {
+      "id": "DM10",
+      "title_en": "Flow / Sankey Reveal",
+      "title_zh": "路径与流向揭示",
+      "family": "Flow",
+      "motion_rule": "源节点→连接路径→目标节点，宽度与实际量一致",
+      "use_cases": "供应链、出口路线",
+      "recommended_duration": "1200–2200ms",
+      "motion_tokens": "流量守恒或注明损耗，链接宽度同标度",
+      "failure_mode": "任意线宽和动画速度暗示虚假规模"
+    },
+    {
+      "id": "DM11",
+      "title_en": "Geographic Evidence Motion",
+      "title_zh": "地理证据动画",
+      "family": "Spatial",
+      "motion_rule": "地图与数据保持空间配准，路径与坐标按证据绘制",
+      "use_cases": "车企出口地区布局",
+      "recommended_duration": "900–1800ms",
+      "motion_tokens": "地域归属真实，标注与地图同坐标系统",
+      "failure_mode": "为了好看随意移动国家/节点位置"
+    },
+    {
+      "id": "DM12",
+      "title_en": "Uncertainty / Revision",
+      "title_zh": "不确定性与修订",
+      "family": "Evidence",
+      "motion_rule": "置信区间、估计/预测、发布版次始终保留",
+      "use_cases": "预测值、政策推演",
+      "recommended_duration": "800–1500ms",
+      "motion_tokens": "区间带和source标注与值一起出现",
+      "failure_mode": "把估算、预测和实绩画为同一确定事实"
+    }
+  ],
+  "real_case_references": [
+    {
+      "title": "Financial Times / Visual Vocabulary",
+      "url": "https://github.com/Financial-Times/chart-doctor/tree/main/visual-vocabulary",
+      "study": "先根据数据关系选择图表类型，避免为动画而误用图形"
+    },
+    {
+      "title": "The Pudding / Scrollytelling without code",
+      "url": "https://pudding.cool/process/no-code-charts/",
+      "study": "让数据视觉在阅读进程中保持并分段变化"
+    },
+    {
+      "title": "The Pudding / Data storytelling process",
+      "url": "https://pudding.cool/process/how-to-make-dope-shit-part-3/",
+      "study": "先确定叙事问题和数据证据，再编排视觉发现"
+    },
+    {
+      "title": "Observable / Five ways to effectively use animation",
+      "url": "https://old.observablehq.com/blog/effective-animation",
+      "study": "过渡如何帮助理解状态、追踪变化与聚焦异常"
+    },
+    {
+      "title": "D3 / Learn Animation",
+      "url": "https://observablehq.com/@d3/learn-d3-animation",
+      "study": "真实数据绑定下的路径动画与平滑状态迁移"
+    },
+    {
+      "title": "PolicyViz / 10 Ways to Mislead with Data Visualization",
+      "url": "https://policyviz.com/2023/02/07/10-ways-to-mislead-with-data-visualization/",
+      "study": "图形比例、口径、颜色和标注如何误导"
+    }
+  ],
+  "data_contract_required_fields": [
+    "entity",
+    "metric",
+    "value",
+    "unit",
+    "period",
+    "geography",
+    "source_url",
+    "retrieved_at",
+    "denominator",
+    "is_estimate",
+    "methodology",
+    "revision"
+  ],
+  "chart_integrity_tests": [
+    "metric and period match",
+    "units and denominator comparable",
+    "bar chart zero baseline",
+    "time axis evenly spaced",
+    "same scale for small multiples",
+    "share of whole totals verified",
+    "estimate/forecast labeled",
+    "no fictional data in publishable output"
+  ],
+  "demo_dataset_notice": "Visual demo values are synthetic and must not be published as factual claims."
+}

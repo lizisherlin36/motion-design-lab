@@ -1,0 +1,221 @@
+{
+  "schema_version": "1.0",
+  "library": "Motion Design Lab",
+  "chapter_id": "chapter01",
+  "title": "Editorial Kinetic Typography",
+  "status": "curriculum_ready_not_integrated",
+  "design_role": "工业编辑式动态排版的系统学习章节，网站集成留待六章完成后执行",
+  "style_tokens": {
+    "TRA": {
+      "background": "#232525",
+      "primary": "#DAFA39",
+      "accent": "#FF6704",
+      "neutral": "#EBEEE5"
+    },
+    "PRA": {
+      "background": "#063BEB",
+      "primary": "#F9FF00",
+      "accent": "#121212",
+      "neutral": "#FFFFFF"
+    },
+    "grid_columns": 12,
+    "safe_area_fraction": 0.06,
+    "format": "1920x1080",
+    "fps": 30,
+    "fonts_cjk": [
+      "Noto Sans CJK SC",
+      "Source Han Sans SC"
+    ],
+    "fonts_latin": [
+      "Space Grotesk",
+      "Inter"
+    ],
+    "default_ease": "cubic-bezier(0.18, 0.82, 0.19, 1)",
+    "reading_hold_seconds": 1.5,
+    "max_simultaneous_motion_groups": 2,
+    "restrictions": [
+      "no generic glow",
+      "no uncontrolled bounce",
+      "no random per-character motion",
+      "no synthetic glyph distortion",
+      "no ambient particle clutter",
+      "no fake data"
+    ]
+  },
+  "patterns": [
+    {
+      "id": "KT01",
+      "family": "Structural Reveal",
+      "title_en": "Masked Baseline Reveal",
+      "title_zh": "行遮罩·基线揭示",
+      "motion_rule": "标题行从固定裁切区域下方上移；背景、边界与基线不运动",
+      "recommended_duration": "450–650ms",
+      "stagger": "80–120ms",
+      "use_cases": "资讯片头、章节标题",
+      "avoid": "把容器与文字一起移动，导致视觉基准漂移"
+    },
+    {
+      "id": "KT02",
+      "family": "Structural Reveal",
+      "title_en": "Staggered Phrase Cascade",
+      "title_zh": "词组级递进入场",
+      "motion_rule": "按意义词组而不是机械逐字切分，逐组接续入场",
+      "recommended_duration": "380–600ms",
+      "stagger": "80–160ms",
+      "use_cases": "论点三连、品牌对比",
+      "avoid": "每个汉字随机弹出，破坏词组可读性"
+    },
+    {
+      "id": "KT03",
+      "family": "Structural Reveal",
+      "title_en": "Axis-Led Wipe Type",
+      "title_zh": "轴线引导擦入",
+      "motion_rule": "一条线确定方向，文字跟随矩形遮罩局部显现",
+      "recommended_duration": "420–700ms",
+      "stagger": "0–120ms",
+      "use_cases": "工业说明、技术标签",
+      "avoid": "没有结构依据的闪光扫描"
+    },
+    {
+      "id": "KT04",
+      "family": "Typographic Form",
+      "title_en": "Editorial Overscale Crop",
+      "title_zh": "超大字级·编辑式裁切",
+      "motion_rule": "字体远超窗口，但核心词形和句意依然可辨认",
+      "recommended_duration": "450–800ms",
+      "stagger": "0–80ms",
+      "use_cases": "强观点、章节封面",
+      "avoid": "截断核心汉字导致误读"
+    },
+    {
+      "id": "KT05",
+      "family": "Typographic Form",
+      "title_en": "Tracking / Width Compression",
+      "title_zh": "字距或字宽收束",
+      "motion_rule": "用字距或可变字体 width 轴收束；避免直接压扁字形",
+      "recommended_duration": "650–1000ms",
+      "stagger": "—",
+      "use_cases": "工业科技、品牌字标",
+      "avoid": "缩放 transformX 导致字形变形"
+    },
+    {
+      "id": "KT06",
+      "family": "Typographic Form",
+      "title_en": "Weight / Inversion Rhythm",
+      "title_zh": "字重与正负形对置",
+      "motion_rule": "填充/描边或字重变化与色块反相同步执行",
+      "recommended_duration": "300–650ms",
+      "stagger": "50–100ms",
+      "use_cases": "论点强调、段落节拍",
+      "avoid": "过于频繁闪烁、文字形态跳变"
+    },
+    {
+      "id": "KT07",
+      "family": "Editorial Layout Transition",
+      "title_en": "Typographic Grid Reflow",
+      "title_zh": "字块网格重排",
+      "motion_rule": "词组从单一标题重组到三列信息架构，使用可追踪的运动路径",
+      "recommended_duration": "550–900ms",
+      "stagger": "80–130ms",
+      "use_cases": "多品牌/产品比较",
+      "avoid": "中途改变字号与列宽，让对齐关系丢失"
+    },
+    {
+      "id": "KT08",
+      "family": "Editorial Layout Transition",
+      "title_en": "Typographic Match Cut",
+      "title_zh": "字体结构匹配转场",
+      "motion_rule": "共享笔画、矩形边缘或基线连接下一画面",
+      "recommended_duration": "400–800ms",
+      "stagger": "—",
+      "use_cases": "章节切换",
+      "avoid": "仅靠旋转、模糊或白闪掩盖无关场景"
+    },
+    {
+      "id": "KT09",
+      "family": "Editorial Layout Transition",
+      "title_en": "Split-Field Typography",
+      "title_zh": "分栏对置·文字构图",
+      "motion_rule": "两个信息区沿相同基线对位；保持两侧内容完整可读",
+      "recommended_duration": "450–750ms",
+      "stagger": "50–110ms",
+      "use_cases": "Before/After、中外策略对比",
+      "avoid": "两边分别做不同特效，冲淡对照"
+    },
+    {
+      "id": "KT10",
+      "family": "Information & Identity",
+      "title_en": "Numeric Editorial Typography",
+      "title_zh": "数字作为排版主角",
+      "motion_rule": "数值先后有序建立；固定数字宽度、单位与来源",
+      "recommended_duration": "650–1200ms",
+      "stagger": "—",
+      "use_cases": "财经、里程碑、指数、排名",
+      "avoid": "数字无端滚动或虚构实时值"
+    },
+    {
+      "id": "KT11",
+      "family": "Information & Identity",
+      "title_en": "Semantic Type Movement",
+      "title_zh": "语义映射文字运动",
+      "motion_rule": "聚合概念用收拢，扩张概念用延展，转折概念用中轴翻转",
+      "recommended_duration": "450–950ms",
+      "stagger": "—",
+      "use_cases": "解释性短片、品牌概念",
+      "avoid": "动作与语义相反，只求炫酷"
+    },
+    {
+      "id": "KT12",
+      "family": "Information & Identity",
+      "title_en": "Living Typography Loop",
+      "title_zh": "持续生命化字体系统",
+      "motion_rule": "字体在有限幅度内持续呼吸、组合或状态变化，需专门留出阅读稳定段",
+      "recommended_duration": "2400–5000ms循环",
+      "stagger": "—",
+      "use_cases": "品牌识别、音乐和展览",
+      "avoid": "事实文字不断变形，阅读与审校失败"
+    }
+  ],
+  "real_case_references": [
+    {
+      "studio": "DIA Studio",
+      "project": "Nike Statement House",
+      "year": 2017,
+      "url": "https://dia.tv/project/nike-statement-house/"
+    },
+    {
+      "studio": "DIA Studio",
+      "project": "Nike Basketball",
+      "year": 2016,
+      "url": "https://dia.tv/project/nike-basketball/"
+    },
+    {
+      "studio": "DIA Studio",
+      "project": "Nuits Sonores",
+      "year": 2025,
+      "url": "https://dia.tv/project/nuits-sonores/"
+    },
+    {
+      "studio": "Holke79",
+      "project": "Gamma",
+      "year": null,
+      "url": "https://www.holke79.com/project-gamma.html"
+    },
+    {
+      "studio": "Tendril",
+      "project": "Nike - So Many Ways To Air",
+      "year": null,
+      "url": "https://tendril.studio/work/nikemanywaystoair/"
+    }
+  ],
+  "training_exercise": {
+    "title": "三种出海路径",
+    "comparison_variants": [
+      "KT01",
+      "KT04",
+      "KT07"
+    ],
+    "duration_seconds": 6,
+    "claims": "Brand names and performance numbers must not be fabricated"
+  }
+}

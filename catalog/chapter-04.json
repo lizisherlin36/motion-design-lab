@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.1", "library": "Motion Design Lab", "chapter_id": "ch04", "chapter": "CH04", "title": "Hybrid 2D / 3D Motion", "title_zh": "二维与三维融合动效", "status": "chapter_ready_not_merged_into_site",
+  "asset_note": "Original procedural speculative mobility platform, not a faithful model of any production vehicle. Graphical percentages are demonstration-only.",
+  "style_tokens": {
+    "TRA": {"background":"#242626","primary":"#D9FA39","accent":"#FF6500","paper":"#ECF0E9"},
+    "PRA": {"background":"#073AEF","primary":"#F8FF00","accent":"#FFFFFF","paper":"#111111"},
+    "grid_columns":12,"safe_fraction":0.06,"fps":30,"camera":{"type":"perspective|orthographic","target":"object_center","orbit_max_deg_per_sec":22,"default_fov_deg":38},
+    "annotation":{"anchor":"world_space","label":"screen_space","safe_margin_px":60,"minimum_readable_hold_sec":1.5},
+    "no":["fake engineering dimensions", "model topology distortion", "screen-space labels pasted to arbitrary 3D points", "unmotivated orbit", "persistent screen clutter", "neon HUD decoration"]
+  },
+  "patterns": [
+    {"id":"H401","title_en":"Orthographic Editorial","title_zh":"正交编辑式工程视图","family":"Camera","motion_rule":"正交视角、明确朝向与统一尺寸尺度，二维标题保持屏幕空间稳定","recommended_duration":"0.7–1.2s","motion_tokens":"ortho; tilt 25–35deg; 12-column grid; static hold 1.5s","failure_mode":"把近大远小的透视效果误用成尺寸证据"},
+    {"id":"H402","title_en":"Controlled Orbit","title_zh":"受控环绕","family":"Camera","motion_rule":"相机绕稳定轴与目标点移动，刻意揭示隐藏结构","recommended_duration":"1.2–2.4s","motion_tokens":"orbit 35–65deg; smoothstep; target fixed","failure_mode":"连续无意义地转圈"},
+    {"id":"H403","title_en":"Depth-Layer Parallax","title_zh":"深度分层视差","family":"Camera","motion_rule":"前景/主体/背景建立明确的深度层级与速度差","recommended_duration":"0.8–1.6s","motion_tokens":"3 depth planes; slight camera lateral translation","failure_mode":"背景漂移造成假 3D"},
+    {"id":"H404","title_en":"Exploded Assembly","title_zh":"结构爆炸分解","family":"Technical","motion_rule":"可追踪部件沿合理拆装轴分离，零件ID保持稳定","recommended_duration":"1.2–2.5s","motion_tokens":"component hierarchy; linear trajectories; parent assembly anchored","failure_mode":"零件随机飞散、错误装配关系"},
+    {"id":"H405","title_en":"Cutaway & X-Ray Reveal","title_zh":"剖切与X光揭示","family":"Technical","motion_rule":"用渐进剖切或半透明外壳揭示内层结构，深度正确","recommended_duration":"0.8–1.5s","motion_tokens":"shell fade; internal visibility; depth masking","failure_mode":"把不应可见的零件与结构画到前表面"},
+    {"id":"H406","title_en":"Surface-to-Wireframe","title_zh":"实体与线框转换","family":"Technical","motion_rule":"同一网格在实体渲染与线框模式中插值，轮廓连续","recommended_duration":"0.6–1.1s","motion_tokens":"shared mesh vertices; wire opacity; edge stable","failure_mode":"切换时模型轮廓跳变或错位"},
+    {"id":"H407","title_en":"World-Anchored Labels","title_zh":"三维锚点二维标注","family":"Graphic","motion_rule":"标签起点来自3D空间投影，文字位于2D安全区并进行避让","recommended_duration":"0.5–1.1s","motion_tokens":"project anchor each frame; leader lines; visibility test","failure_mode":"线头漂浮、标签遮挡主体"},
+    {"id":"H408","title_en":"Projection-Matched Graphics","title_zh":"投影匹配图形","family":"Graphic","motion_rule":"二维符号贴合选定三维面随投影变形，文字仍保持可读","recommended_duration":"0.6–1.2s","motion_tokens":"plane corners projected; overlay clipped to polygon","failure_mode":"把平面图标当成任意角度悬浮的HUD"},
+    {"id":"H409","title_en":"3D-to-Infographic Match Cut","title_zh":"三维向信息图匹配转场","family":"Graphic","motion_rule":"保留共享色彩、轴线或几何锚点，把3D产品结构转为2D图表","recommended_duration":"0.7–1.4s","motion_tokens":"shared anchor; projected position; chart entrance; demo data clearly labeled","failure_mode":"3D消失后直接弹出不相关图表"},
+    {"id":"H410","title_en":"Material-State Transition","title_zh":"材质状态转换","family":"Art direction","motion_rule":"材料与观察模式改变对应真实叙事意图","recommended_duration":"0.7–1.3s","motion_tokens":"material states; restrained highlights; no extreme bloom","failure_mode":"炫光掩盖产品轮廓"},
+    {"id":"H411","title_en":"Spatial Editorial Split","title_zh":"空间编辑分屏","family":"Art direction","motion_rule":"将三维视窗与二维信息版面放在同一精确网格中","recommended_duration":"0.8–1.5s","motion_tokens":"60/40 layout; persistent 3D frame; 2D locked","failure_mode":"文字挤压、主体裁切、信息拥挤"},
+    {"id":"H412","title_en":"Technical-to-Cinematic Transition","title_zh":"技术到电影级产品展示","family":"Art direction","motion_rule":"从技术正交图自然切换为透视英雄镜头，保留物体方向","recommended_duration":"1.2–2.5s","motion_tokens":"camera projection blend; material progression; minimal text","failure_mode":"视角与几何突然变化，导致观众失去物体方位"}
+  ]
+}
